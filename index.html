@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Radar School — radar systems taught from the ground up, by Hara Madhav Talasila</title>
+<meta name="description" content="Radar School offers research services and instruction in radar systems, remote sensing, and advanced electromagnetics, worked through theory, examples, applications, code, and hardware." />
+
+<meta property="og:title" content="Radar School" />
+<meta property="og:description" content="Radar systems taught from 101 to 999. Theory, examples, applications, code, and hardware." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://radarschool.haramadhav.com/" />
+
+<link rel="canonical" href="https://radarschool.haramadhav.com/" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Saira:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --paper:       #edf1f4;   /* cool light background */
+    --paper-soft:  #e3e9ef;   /* cards and panels */
+    --panel:       #d8e0e8;   /* card hover */
+    --line:        #ccd6df;   /* cool borders */
+    --fog:         #47596a;   /* secondary text */
+    --text:        #14222c;   /* deep slate ink */
+    --muted:       #7a8896;   /* labels */
+    --accent:      #0e7490;   /* teal-cyan accent and links */
+    --accent-soft: #2b6b80;   /* section labels */
+    --ring:        rgba(20, 48, 64, 0.08);
+    --maxw:        980px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--text);
+    font-family: "Saira", system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: #0a566a; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  .hero {
+    position: relative;
+    padding: 110px 0 76px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero .rings, .hero .crosshair, .hero .sweep {
+    position: absolute; top: 50%; left: 50%;
+    width: 1100px; height: 1100px;
+    transform: translate(-50%, -42%);
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(circle at center, #000 0%, transparent 64%);
+            mask-image: radial-gradient(circle at center, #000 0%, transparent 64%);
+  }
+  .hero .rings {
+    background: repeating-radial-gradient(circle at center,
+      transparent 0, transparent 78px, var(--ring) 79px, var(--ring) 80px);
+  }
+  .hero .crosshair {
+    background:
+      linear-gradient(to right, transparent 49.95%, var(--ring) 50%, transparent 50.05%),
+      linear-gradient(to bottom, transparent 49.95%, var(--ring) 50%, transparent 50.05%);
+  }
+  .hero .sweep {
+    border-radius: 50%;
+    background: conic-gradient(from 0deg,
+      rgba(14,116,144,0.20) 0deg, rgba(14,116,144,0.05) 28deg,
+      transparent 62deg, transparent 360deg);
+    animation: sweep 7.5s linear infinite;
+  }
+  @keyframes sweep { to { transform: translate(-50%, -42%) rotate(360deg); } }
+
+  .hero-inner { position: relative; z-index: 2; }
+  .callsign {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12.5px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--accent-soft); margin-bottom: 26px;
+  }
+  h1.wordmark {
+    font-family: "Chakra Petch", sans-serif; font-weight: 700;
+    font-size: clamp(40px, 8vw, 78px); line-height: 1.02; letter-spacing: 0.01em;
+    margin: 0 0 22px; color: var(--text); text-transform: uppercase;
+  }
+  h1.wordmark em { font-style: normal; color: var(--accent); }
+  .lede {
+    font-size: clamp(18px, 2.3vw, 22px); color: var(--fog); font-weight: 400;
+    max-width: 660px; margin: 0;
+  }
+  .band-strip {
+    margin-top: 40px; display: flex; flex-wrap: wrap;
+    border: 1px solid var(--line); border-radius: 3px; overflow: hidden; max-width: 660px;
+  }
+  .band-strip span {
+    font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.12em;
+    color: var(--muted); padding: 9px 14px; border-right: 1px solid var(--line);
+    flex: 1 0 auto; text-align: center;
+  }
+  .band-strip span:last-child { border-right: 0; }
+  .band-strip span.active { color: var(--accent); background: rgba(14,116,144,0.10); }
+
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  .section-label {
+    font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--accent-soft); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::before { content: ""; width: 22px; height: 1px; background: var(--accent-soft); display: inline-block; }
+  h2 {
+    font-family: "Chakra Petch", sans-serif; font-weight: 600;
+    font-size: clamp(25px, 4vw, 35px); line-height: 1.18; letter-spacing: 0.005em;
+    margin: 0 0 22px; color: var(--text);
+  }
+  p.body { max-width: 680px; color: var(--text); }
+  p.body + p.body { margin-top: 18px; }
+  .approach {
+    margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px;
+  }
+  .approach span {
+    font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.08em;
+    color: var(--fog); border: 1px solid var(--line); border-radius: 3px; padding: 7px 13px;
+    background: var(--paper-soft);
+  }
+
+  .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+  @media (max-width: 620px) { .paths { grid-template-columns: 1fr; } }
+  .path-card {
+    display: block; border: 1px solid var(--line); background: var(--paper-soft);
+    border-radius: 4px; padding: 22px 24px;
+    transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  }
+  .path-card:hover { border-color: var(--accent); background: var(--panel); transform: translateY(-2px); }
+  .path-card .kicker {
+    font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+  }
+  .path-card .title { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 20px; color: var(--text); }
+  .path-card .sub { font-size: 15px; color: var(--fog); margin-top: 6px; }
+  .path-card .arrow { color: var(--accent); }
+
+  .soon {
+    border: 1px solid var(--line); border-left: 3px solid var(--accent);
+    background: var(--paper-soft); border-radius: 4px; padding: 22px 26px;
+    color: var(--fog); font-size: 16.5px; margin-top: 6px;
+  }
+  .soon .tag {
+    font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent-soft); display: block; margin-bottom: 8px;
+  }
+
+  footer { padding: 50px 0 80px; }
+  .foot-grid { display: flex; flex-wrap: wrap; gap: 30px 50px; align-items: baseline; }
+  .foot-grid .col .lbl {
+    font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+  }
+  .foot-grid .col a, .foot-grid .col span { font-size: 16px; }
+  .colophon {
+    margin-top: 40px; font-family: "IBM Plex Mono", monospace; font-size: 11.5px;
+    color: var(--muted); letter-spacing: 0.03em;
+  }
+  @media (prefers-reduced-motion: reduce) { .hero .sweep { animation: none; opacity: 0.5; } }
+</style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="rings" aria-hidden="true"></div>
+    <div class="crosshair" aria-hidden="true"></div>
+    <div class="sweep" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <div class="callsign">Radar School &nbsp;//&nbsp; Research &amp; Instruction</div>
+      <h1 class="wordmark">Radar<br>School<em>.</em></h1>
+      <p class="lede">Radar systems taught from the ground up, from 101 to 999. The work runs through theory, examples, applications, code, and hardware, so the ideas connect all the way from first principles to deployed sensors.</p>
+      <div class="band-strip" aria-hidden="true">
+        <span>VHF</span><span>UHF</span><span class="active">L</span><span class="active">S</span><span class="active">C</span><span class="active">X</span><span>Ku</span><span>Ka</span><span>V</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-label">What this is</div>
+        <h2>Research services and uncompromising instruction</h2>
+        <p class="body">Radar School provides specialised research services and direct instruction in radar systems, remote sensing, and advanced electromagnetics. The aim is to move past surface level trivia toward the actual equations, hardware architectures, and signal processing needed to build and deploy real sensor solutions, and the instruction goes as deep as the mathematics and the physics allow.</p>
+        <p class="body">Every topic is worked through five ways, namely theory, examples, applications, code, and hardware.</p>
+        <div class="approach" aria-hidden="true">
+          <span>Theory</span><span>Examples</span><span>Applications</span><span>Code</span><span>Hardware</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="follow">
+      <div class="wrap">
+        <div class="section-label">Follow and connect</div>
+        <h2>Join the regular 1% challenge</h2>
+        <p class="body" style="margin-bottom:26px;">Frequent application oriented quiz tests engineering intuition and is the visible one percent of the material. The remaining ninety nine percent comes through classes, consulting, and research collaboration. Follow the page for the challenge, and connect to go deeper.</p>
+        <div class="paths">
+          <a class="path-card" href="https://www.linkedin.com/company/radar" target="_blank" rel="noopener">
+            <div class="kicker">The page</div>
+            <div class="title">Radar School on LinkedIn <span class="arrow">&rarr;</span></div>
+            <div class="sub">Follow for the daily 1% challenge.</div>
+          </a>
+          <a class="path-card" href="https://www.linkedin.com/in/haramadhav/" target="_blank" rel="noopener">
+            <div class="kicker">The author</div>
+            <div class="title">Hara Madhav Talasila <span class="arrow">&rarr;</span></div>
+            <div class="sub">Connect to consult or collaborate.</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="archive">
+      <div class="wrap">
+        <div class="section-label">Archive</div>
+        <h2>Articles, collected here over time</h2>
+        <p class="body">Finished articles will be archived on this site as they are published. New pieces appear as the work and the ideas arise, in no fixed order or sequence, so this is a growing collection rather than a numbered course.</p>
+        <div class="soon">
+          <span class="tag">Citation, oncoming</span>
+          A single citable identifier for the whole collection, through a Zenodo concept DOI, is on the way and will appear here once the first version is archived.
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="col">
+          <div class="lbl">Author</div>
+          <span>Hara Madhav Talasila</span>
+        </div>
+        <div class="col">
+          <div class="lbl">Home</div>
+          <a href="https://haramadhav.com" target="_blank" rel="noopener">haramadhav.com</a>
+        </div>
+        <div class="col">
+          <div class="lbl">Source</div>
+          <a href="https://github.com/radarschool" target="_blank" rel="noopener">github.com/radarschool</a>
+        </div>
+        <div class="col">
+          <div class="lbl">LinkedIn</div>
+          <a href="https://www.linkedin.com/in/haramadhav/" target="_blank" rel="noopener">in/haramadhav</a>
+        </div>
+        <div class="col">
+          <div class="lbl">ORCID</div>
+          <a href="https://orcid.org/0000-0002-6209-3121" target="_blank" rel="noopener">0000-0002-6209-3121</a>
+        </div>
+      </div>
+      <div class="colophon">Radar School &middot; radarschool.haramadhav.com &middot; theory, examples, applications, code, and hardware.</div>
+    </div>
+  </footer>
+
+</body>
+</html>

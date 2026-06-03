@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+title: "Radar School: a radar education series"
+message: "If you reference this collection, please cite it using the metadata below."
+type: dataset
+authors:
+  - given-names: Hara Madhav
+    family-names: Talasila
+    orcid: "https://orcid.org/0000-0002-6209-3121"
+abstract: >-
+  Radar School is a radar education series covering RF
+  hardware, signal processing, electromagnetics, and remote sensing. Articles
+  are first published on LinkedIn and archived here in Markdown and PDF for
+  long-term preservation and citation.
+keywords:
+  - radar
+  - electromagnetics
+  - signal processing
+  - remote sensing
+  - radar engineering education
+url: "https://radarschool.haramadhav.com"
+repository-code: "https://github.com/radarschool/radarschool.github.io"
+license: CC-BY-4.0
+# After the first Zenodo release, paste the CONCEPT DOI here so every future
+# release and the GitHub Cite button point at the stable collection identifier:
+# doi: 10.5281/zenodo.XXXXXXX

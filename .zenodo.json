@@ -1,0 +1,21 @@
+{
+  "title": "Radar School: a radar education series",
+  "upload_type": "publication",
+  "publication_type": "other",
+  "description": "Radar School is a radar education series covering RF hardware, signal processing, electromagnetics, and remote sensing. Articles are first published on LinkedIn and archived here in HTML and PDF for long-term preservation and citation. This record represents the evolving collection. Each release adds the most recent articles under a single concept DOI.",
+  "creators": [
+    {
+      "name": "Talasila, Hara Madhav",
+      "orcid": "0000-0002-6209-3121"
+    }
+  ],
+  "keywords": [
+    "radar",
+    "electromagnetics",
+    "signal processing",
+    "remote sensing",
+    "radar engineering education"
+  ],
+  "license": "CC-BY-4.0",
+  "access_right": "open"
+}
