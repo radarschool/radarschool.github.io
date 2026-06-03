@@ -20,7 +20,7 @@ Browse the archive on the [home page](https://radarschool.haramadhav.com), or fo
 
 The collection carries a single persistent identifier through Zenodo. Once minted, the concept DOI below always resolves to the most recent archived version.
 
-> Talasila, H. M. *Radar School: a radar education series.* Zenodo. DOI 10.5281/zenodo.XXXXXXX
+> Talasila, H. M. *Radar School: a radar education series.* Zenodo. DOI 10.5281/zenodo.20532945
 
 ## License
 
