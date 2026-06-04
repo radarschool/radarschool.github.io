@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Stealth Is Not a Property · Radar School</title>
+<meta name="description" content="Low observability is a system condition rather than a coating, set by geometry, materials, frequency, and the engagement itself." />
+<link rel="canonical" href="https://radarschool.haramadhav.com/articles/stealth-property-radar-ubstc/" />
+
+<meta name="author" content="Hara Madhav Talasila" />
+<meta property="og:title" content="Stealth Is Not a Property" />
+<meta property="og:description" content="Low observability is a system condition rather than a coating, set by geometry, materials, frequency, and the engagement itself." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://radarschool.haramadhav.com/articles/stealth-property-radar-ubstc/" />
+<meta property="og:site_name" content="Radar School" />
+<meta property="og:image" content="https://radarschool.haramadhav.com/assets/stealth-property-radar-ubstc.png" /><meta name="twitter:card" content="summary_large_image" />
+
+<meta name="citation_title" content="Stealth Is Not a Property" />
+<meta name="citation_author" content="Hara Madhav Talasila" />
+<meta name="citation_publication_date" content="2026/05/19" /><meta name="citation_technical_report_institution" content="Radar School" />
+<meta name="citation_publisher" content="Radar School" />
+<meta name="citation_abstract_html_url" content="https://radarschool.haramadhav.com/articles/stealth-property-radar-ubstc/" />
+<meta name="citation_keywords" content="radar; RCS; stealth; radar absorbing materials; low observability" /><meta name="citation_language" content="en" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Stealth Is Not a Property",
+  "description": "Low observability is a system condition rather than a coating, set by geometry, materials, frequency, and the engagement itself.",
+  "url": "https://radarschool.haramadhav.com/articles/stealth-property-radar-ubstc/",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://radarschool.haramadhav.com/articles/stealth-property-radar-ubstc/"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Hara Madhav Talasila",
+    "url": "https://orcid.org/0000-0002-6209-3121"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Radar School",
+    "url": "https://radarschool.haramadhav.com"
+  },
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "Radar School",
+    "url": "https://radarschool.haramadhav.com",
+    "identifier": "https://doi.org/10.5281/zenodo.20532945"
+  },
+  "image": "https://radarschool.haramadhav.com/assets/stealth-property-radar-ubstc.png",
+  "datePublished": "2026-05-19",
+  "dateModified": "2026-05-19",
+  "keywords": "radar, RCS, stealth, radar absorbing materials, low observability"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Saira:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --paper:       #edf1f4;
+    --paper-soft:  #e3e9ef;
+    --panel:       #d8e0e8;
+    --line:        #ccd6df;
+    --fog:         #47596a;
+    --text:        #14222c;
+    --muted:       #7a8896;
+    --accent:      #0e7490;
+    --accent-soft: #2b6b80;
+    --ring:        rgba(20, 48, 64, 0.08);
+    --maxw:        980px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--text);
+    font-family: "Saira", system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: #0a566a; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  /* ---- hero (home) ---- */
+  .hero { position: relative; padding: 110px 0 76px; overflow: hidden; border-bottom: 1px solid var(--line); }
+  .hero .rings, .hero .crosshair, .hero .sweep {
+    position: absolute; top: 50%; left: 50%; width: 1100px; height: 1100px;
+    transform: translate(-50%, -42%); pointer-events: none;
+    -webkit-mask-image: radial-gradient(circle at center, #000 0%, transparent 64%);
+            mask-image: radial-gradient(circle at center, #000 0%, transparent 64%);
+  }
+  .hero .rings { background: repeating-radial-gradient(circle at center, transparent 0, transparent 78px, var(--ring) 79px, var(--ring) 80px); }
+  .hero .crosshair {
+    background:
+      linear-gradient(to right, transparent 49.95%, var(--ring) 50%, transparent 50.05%),
+      linear-gradient(to bottom, transparent 49.95%, var(--ring) 50%, transparent 50.05%);
+  }
+  .hero .sweep {
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, rgba(14,116,144,0.20) 0deg, rgba(14,116,144,0.05) 28deg, transparent 62deg, transparent 360deg);
+    animation: sweep 7.5s linear infinite;
+  }
+  @keyframes sweep { to { transform: translate(-50%, -42%) rotate(360deg); } }
+  .hero-inner { position: relative; z-index: 2; }
+
+  .callsign { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 26px; }
+  h1.wordmark { font-family: "Chakra Petch", sans-serif; font-weight: 700; font-size: clamp(40px, 8vw, 78px); line-height: 1.02; letter-spacing: 0.01em; margin: 0 0 22px; color: var(--text); text-transform: uppercase; }
+  h1.wordmark em { font-style: normal; color: var(--accent); }
+  .lede { font-size: clamp(18px, 2.3vw, 22px); color: var(--fog); font-weight: 400; max-width: 660px; margin: 0; }
+  .band-strip { margin-top: 40px; display: flex; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 3px; overflow: hidden; max-width: 660px; }
+  .band-strip span { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--muted); padding: 9px 14px; border-right: 1px solid var(--line); flex: 1 0 auto; text-align: center; }
+  .band-strip span:last-child { border-right: 0; }
+  .band-strip span.active { color: var(--accent); background: rgba(14,116,144,0.10); }
+
+  /* ---- sections ---- */
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  .section-label { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .section-label::before { content: ""; width: 22px; height: 1px; background: var(--accent-soft); display: inline-block; }
+  h2 { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: clamp(25px, 4vw, 35px); line-height: 1.18; letter-spacing: 0.005em; margin: 0 0 22px; color: var(--text); }
+  p.body { max-width: 680px; color: var(--text); }
+  p.body + p.body { margin-top: 18px; }
+  .approach { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .approach span { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--fog); border: 1px solid var(--line); border-radius: 3px; padding: 7px 13px; background: var(--paper-soft); }
+
+  .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+  @media (max-width: 620px) { .paths { grid-template-columns: 1fr; } }
+  .path-card { display: block; border: 1px solid var(--line); background: var(--paper-soft); border-radius: 4px; padding: 22px 24px; transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease; }
+  .path-card:hover { border-color: var(--accent); background: var(--panel); transform: translateY(-2px); }
+  .path-card .kicker { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .path-card .title { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 20px; color: var(--text); }
+  .path-card .sub { font-size: 15px; color: var(--fog); margin-top: 6px; }
+  .path-card .arrow { color: var(--accent); }
+
+  /* ---- article archive list ---- */
+  .archive { border-top: 1px solid var(--line); margin-top: 8px; }
+  .article-row { display: grid; grid-template-columns: 1fr auto; gap: 26px; align-items: baseline; padding: 24px 4px; border-bottom: 1px solid var(--line); }
+  @media (max-width: 620px) { .article-row { grid-template-columns: 1fr; gap: 10px; } }
+  .article-row .head h3 { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 21px; line-height: 1.2; margin: 0 0 6px; }
+  .article-row .head h3 a { color: var(--text); }
+  .article-row .head h3 a:hover { color: var(--accent); }
+  .article-row .head p { margin: 0; color: var(--fog); font-size: 16px; line-height: 1.5; max-width: 560px; }
+  .article-row .links { display: flex; gap: 14px; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: 0.04em; white-space: nowrap; }
+  .article-row .links a { border-bottom: 1px solid rgba(14,116,144,0.3); padding-bottom: 1px; }
+
+  .cite-box { border: 1px solid var(--line); border-left: 3px solid var(--accent); background: var(--paper-soft); border-radius: 4px; padding: 22px 26px; color: var(--fog); font-size: 16px; margin-top: 6px; }
+  .cite-box .tag { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-soft); display: block; margin-bottom: 10px; }
+  .cite-box img { margin-top: 12px; }
+
+  /* ---- article page ---- */
+  .topbar { border-bottom: 1px solid var(--line); }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 22px; padding-bottom: 22px; }
+  .topbar a.brand { font-family: "Chakra Petch", sans-serif; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text); font-size: 17px; }
+  .topbar a.brand:hover { color: var(--accent); }
+  .topbar .nav { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .article { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+  .article-head { padding: 60px 0 6px; }
+  .article-head .kicker { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 16px; }
+  .article-head h1 { font-family: "Chakra Petch", sans-serif; font-weight: 700; font-size: clamp(30px, 5.4vw, 46px); line-height: 1.1; letter-spacing: 0.005em; margin: 0; color: var(--text); }
+  .cover { width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--line); margin: 30px 0 0; display: block; }
+
+  .article-content { font-size: 18.5px; line-height: 1.78; color: var(--text); padding: 30px 0 10px; }
+  .article-content > *:first-child { margin-top: 0; }
+  .article-content p { margin: 0 0 1.15em; }
+  .article-content h2 { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 26px; line-height: 1.2; margin: 1.8em 0 0.5em; color: var(--text); }
+  .article-content h3 { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 21px; margin: 1.5em 0 0.4em; color: var(--text); }
+  .article-content a { color: var(--accent); border-bottom: 1px solid rgba(14,116,144,0.3); }
+  .article-content blockquote { border-left: 3px solid var(--accent); margin: 1.5em 0; padding: 4px 0 4px 22px; color: var(--fog); font-size: 1.04em; }
+  .article-content blockquote p { margin: 0.3em 0; }
+  .article-content blockquote strong { color: var(--text); }
+  .article-content ul, .article-content ol { padding-left: 1.4em; margin: 0 0 1.15em; }
+  .article-content li { margin-bottom: 0.45em; }
+  .article-content code { font-family: "IBM Plex Mono", monospace; background: var(--paper-soft); padding: 1px 6px; border-radius: 3px; font-size: 0.88em; }
+  .article-content pre { background: var(--paper-soft); border: 1px solid var(--line); border-radius: 5px; padding: 16px; overflow: auto; }
+  .article-content pre code { background: none; padding: 0; }
+  .article-content img { max-width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--line); }
+
+  .article-foot { border-top: 1px solid var(--line); margin-top: 34px; padding: 26px 0 70px; font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: 0.03em; display: flex; gap: 20px; flex-wrap: wrap; }
+
+  /* ---- footer ---- */
+  footer { padding: 50px 0 80px; }
+  .foot-grid { display: flex; flex-wrap: wrap; gap: 30px 50px; align-items: baseline; }
+  .foot-grid .col .lbl { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .foot-grid .col a, .foot-grid .col span { font-size: 16px; }
+  .colophon { margin-top: 40px; font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--muted); letter-spacing: 0.03em; }
+
+  @media (prefers-reduced-motion: reduce) { .hero .sweep { animation: none; opacity: 0.5; } }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <a class="brand" href="/">Radar School</a>
+      <a class="nav" href="/#archive">All articles</a>
+    </div>
+  </div>
+
+  <article class="article">
+    <div class="article-head">
+      <div class="kicker">Radar School</div>
+      <h1>Stealth Is Not a Property</h1>
+<img class="cover" src="/assets/stealth-property-radar-ubstc.png" alt="Stealth Is Not a Property" />    </div>
+
+    <div class="article-content">
+      <blockquote>
+<p><strong>Low observability is a budget, not a coating.</strong></p>
+</blockquote>
+<p>The previous article left a &ldquo;quiet elephant&rdquo; in the radar room. This is the elephant.</p>
+<blockquote>
+<p><strong>There is a word in defense journalism that does not survive a serious conversation with an electromagnetics engineer. The word is stealth.</strong></p>
+</blockquote>
+<h2>What does radio silence actually look like?</h2>
+<p>The first time I walked into the anechoic chamber at CReSIS, I almost laughed at how strange it looked. The walls, floor, and ceiling were lined in pyramidal absorbers, all pointing inward like a dark blue forest growing the wrong direction. The door closed (did not lock!). The first thing the room takes from you is not sound. It is the sense that anything is bouncing off anything. The chamber is a deliberately quiet place for radio waves, the closest engineered approximation to free space that fits indoors.</p>
+<p>You set up your antenna on a rotating positioner, run the cables to a vector network analyzer, and watch the S11 trace settle (this is a return loss plot that shows the fraction of energy that came back into the same port that launched it). When the antenna is well matched and the environment is quiet, the trace drops into a flat, low band that says, in mathematics, almost nothing came home.</p>
+<p>Replace the antenna with a target. Sweep the positioner through 360 degrees. What comes out is a radar cross section curve, which is a fingerprint of the target&rsquo;s shape, polarization response, and surface composition at the frequency you chose. A metal sphere produces a flat curve, independent of angle, which is why spheres anchor most RCS calibrations. A trihedral corner reflector returns an enormous fraction of the incident field over a wide cone of viewing angles, which is why it is the engineer&rsquo;s friend in the field. It depends on wavelength (roughly, frequency) though! No powerlifter wants to carry a huge trihedral over a field or drag it on a sled in the Arctic Circle. A few are smaller than a Rubik&rsquo;s Cube!</p>
+<p>The chamber test is the controlled experiment. In the chamber, the geometry of the target and the physics of the field are the only two things in the room.</p>
+<h2>What does the word &ldquo;stealth&rdquo; even mean to an electromagnetics person?</h2>
+<p>Outside the magazines, stealth is not a property of an object. It is a property of an object viewed from a particular angle, at a particular frequency, in a particular polarization, by a particular receiver geometry. The same airframe that returns very little energy toward a monostatic X-band radar may light up at VHF, or from the side, or from a receiver placed off the transmitter&rsquo;s axis.</p>
+<p>The good version of the word is roughly this:</p>
+<blockquote>
+<p><strong>Low monostatic radar cross section over a chosen band, optimized against the receiver geometry the designer expects to face.</strong></p>
+</blockquote>
+<p>Shaping moves the scattered energy somewhere other than back toward the transmitter. Radar absorbing materials convert a fraction of the incident field to heat through dielectric and magnetic loss. Edge treatments soften the discontinuities that would otherwise diffract strongly into the wrong directions. None of this makes the object invisible. It rearranges where the energy goes. That rearrangement is where the field begins to push back. That is it. A simple elephant, and not as complicated as an Elephant Gambit in chess.</p>
+<h2>What if the receiver is not where the transmitter is?</h2>
+<p>Monostatic radar measures energy returned toward the source. Bistatic radar separates the transmitter and receiver by a bistatic angle. Multistatic systems use several receivers or transmitters, distributed across a wide area.</p>
+<p>Shaping that defeats a monostatic radar tends not to defeat a bistatic one! The incident field induces currents on the surface of the target through the standard boundary conditions on tangential E and H. Those currents radiate. The question is only in what direction, not whether. A faceted or smoothly blended fuselage scatters the wave into directions that depend on the geometry, the wavelength, and the angle of arrival. A receiver positioned off the monostatic axis sees what the transmitter cannot.</p>
+<p>Passive radar takes this further. It uses transmitters of opportunity, such as broadcast FM, digital television, cellular base stations, and even satellite downlinks, as the illuminators. The receivers emit nothing of their own (and capture free fields!). Several systems built in this lineage are openly available commercial products today. The international defense industry has seen marketing of the Czech VERA and Tamara families (by the historical Czech Tesla electronics conglomerate, not the American carmaker). Lockheed&rsquo;s Silent Sentry concept is documented in the open literature. Chinese and Russian engineering houses have published comparable work. The technique is no longer exotic.</p>
+<h2>Why does the wavelength matter so much?</h2>
+<p>Radar cross section is not a single number. It is a function of frequency. The features that drive the low monostatic RCS of a modern airframe, including panel edges, faceted surfaces, edge tapers, and absorber coatings, are tuned to wavelengths in the centimeter range, where the airframe is many wavelengths across and high-frequency scattering theory applies.</p>
+<p>Drop the frequency by an order of magnitude. The wavelength is now a meter or more. Suddenly the airframe is no longer many wavelengths across. It is a few. Resonant scattering takes over from the high-frequency regime, and the shaping that worked so beautifully at X-band gives up some of its advantage. This is the unspoken reason that VHF and UHF surveillance radars have remained in active service in many air defense networks around the world. The physics is unchanged. The bookkeeping is just different at the longer wavelengths.</p>
+<p>Radar absorbing materials hit the same wall. A coating tuned to absorb at one band is largely transparent at another. There is no broadband absorber that is also thin, light, durable, and survives operational use. Engineering trade-offs dominate. Physics writes the rules.</p>
+<h2>Where does all this end up in practice?</h2>
+<p>In the air, the language of low observable design has been spoken by every major aerospace power. The American F-117, B-2, F-22, F-35, and B-21; the Russian Su-57; the Chinese J-20 and J-35; the trilateral GCAP (UK, Italy, Japan, merged from Tempest and F-X); the Franco-German-Spanish FCAS; the South Korean KF-21; and the Indian AMCA are all expressions of the same shaping and materials principles, with different choices about which trade-offs to accept.</p>
+<p>In missiles, low observability is often less about sustained invisibility and more about compressing the detection window. Cruise missile families across the Tomahawk, Storm Shadow, Kh-101, and CJ-10 lineages combine low altitude profiles, terrain masking, and reduced front-aspect RCS to shrink the time that defensive systems have to react. Anti-ship missiles from comparable origins follow the same logic.</p>
+<p>At sea, faceted superstructures appear on the American Zumwalt class, the Russian Admiral Gorshkov class, the Swedish Visby class, the French Lafayette class, and the Chinese Type 055 class. The core idea is the same in every case. Present a smaller monostatic return to a sea-skimming seeker that has limited time and limited bandwidth to make its decision. </p>
+<blockquote>
+<p><strong>The geographies and the politics differ. The electromagnetics is the same.</strong></p>
+</blockquote>
+<h2>What is stealth, really?</h2>
+<p>My professor, Alessandro Salandrino, has a line worth quoting in full. Advanced electromagnetic theory is still electromagnetic theory. The advanced part is the bookkeeping, the numerics, and the engineering tolerance. The theory is what it has been since Maxwell wrote it down.</p>
+<p>A target reflects because surface currents are induced on it by an incident field. Those currents radiate. Change the geometry and you change where the radiated field goes. Add a lossy coating and you reduce the magnitude of those currents at the cost of heating up the coating. Put receivers everywhere and you collect the energy that was scattered into the directions the designer did not optimize for. None of this is new physics. All of it is the same vector calculus applied at increasing engineering precision.</p>
+<blockquote>
+<p><strong>That is the part I find genuinely interesting. The most carefully shaped airframes, the longest-range cruise missiles, the most faceted ships, and the most ambitious passive sensing networks all run on a handful of coupled differential equations that fit on a single page, or probably 3000 if you don&rsquo;t follow my Radar School.</strong></p>
+</blockquote>
+<p>The art is in how carefully you respect them to keep the elephant smiling. The anechoic chamber is honest about this. So is the open sky.</p>
+<blockquote>
+<p><strong>There are other elephants in this room, actively running around and silently eating bananas. A few minions see them anyway. Some by spotting the banana peels. Some by reaching for sensors that were never looking for the elephant to begin with. More elephants, another day!</strong></p>
+</blockquote>
+<p>Background of the title image - Nadir sounding antenna array pattern from my NASA P-3 deployment, with a fragment of the monostatic RCS derivation for a dielectric object.</p>
+<p>#Radar #RadarSchool #Stealth #RCS #LowObservable #PassiveRadar #BistaticRadar #MultistaticRadar #ElectromagneticTheory #Maxwell #Electromagnetics #SignalProcessing #RFEngineering #AESA #PhasedArray #DefenseTech #Aerospace #Avionics #Fighter #Missile #CruiseMissile #Naval #Drone #CUAS</p>
+    </div>
+
+    <div class="article-foot">
+<a href="https://www.linkedin.com/pulse/stealth-property-radar-ubstc/" target="_blank" rel="noopener">Originally on LinkedIn &rarr;</a>      <a href="/#archive">Back to all articles</a>
+      <a href="https://doi.org/10.5281/zenodo.20532945">Series DOI</a>
+    </div>
+  </article>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="col"><div class="lbl">Author</div><span>Hara Madhav Talasila</span></div>
+      <div class="col"><div class="lbl">Home</div><a href="https://haramadhav.com" target="_blank" rel="noopener">haramadhav.com</a></div>
+      <div class="col"><div class="lbl">Source</div><a href="https://github.com/radarschool" target="_blank" rel="noopener">github.com/radarschool</a></div>
+      <div class="col"><div class="lbl">LinkedIn</div><a href="https://www.linkedin.com/in/haramadhav/" target="_blank" rel="noopener">in/haramadhav</a></div>
+      <div class="col"><div class="lbl">ORCID</div><a href="https://orcid.org/0000-0002-6209-3121" target="_blank" rel="noopener">0000-0002-6209-3121</a></div>
+    </div>
+    <div class="colophon">Radar School &middot; radarschool.haramadhav.com &middot; theory, examples, applications, code, and hardware.</div>
+  </div>
+</footer>
+</body>
+</html>

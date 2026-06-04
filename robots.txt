@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://radarschool.haramadhav.com/sitemap.xml

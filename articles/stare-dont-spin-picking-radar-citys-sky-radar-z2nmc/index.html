@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Stare, Don't Spin · Radar School</title>
+<meta name="description" content="Choosing a radar for a city's sky, and why a staring array can beat a spinning dish for persistent low-altitude surveillance." />
+<link rel="canonical" href="https://radarschool.haramadhav.com/articles/stare-dont-spin-picking-radar-citys-sky-radar-z2nmc/" />
+
+<meta name="author" content="Hara Madhav Talasila" />
+<meta property="og:title" content="Stare, Don't Spin" />
+<meta property="og:description" content="Choosing a radar for a city's sky, and why a staring array can beat a spinning dish for persistent low-altitude surveillance." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://radarschool.haramadhav.com/articles/stare-dont-spin-picking-radar-citys-sky-radar-z2nmc/" />
+<meta property="og:site_name" content="Radar School" />
+<meta property="og:image" content="https://radarschool.haramadhav.com/assets/stare-dont-spin-picking-radar-citys-sky-radar-z2nmc.png" /><meta name="twitter:card" content="summary_large_image" />
+
+<meta name="citation_title" content="Stare, Don't Spin" />
+<meta name="citation_author" content="Hara Madhav Talasila" />
+<meta name="citation_publication_date" content="2026/06/03" /><meta name="citation_technical_report_institution" content="Radar School" />
+<meta name="citation_publisher" content="Radar School" />
+<meta name="citation_abstract_html_url" content="https://radarschool.haramadhav.com/articles/stare-dont-spin-picking-radar-citys-sky-radar-z2nmc/" />
+<meta name="citation_keywords" content="radar; staring array; surveillance; counter-UAS; urban airspace" /><meta name="citation_language" content="en" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Stare, Don't Spin",
+  "description": "Choosing a radar for a city's sky, and why a staring array can beat a spinning dish for persistent low-altitude surveillance.",
+  "url": "https://radarschool.haramadhav.com/articles/stare-dont-spin-picking-radar-citys-sky-radar-z2nmc/",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://radarschool.haramadhav.com/articles/stare-dont-spin-picking-radar-citys-sky-radar-z2nmc/"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Hara Madhav Talasila",
+    "url": "https://orcid.org/0000-0002-6209-3121"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Radar School",
+    "url": "https://radarschool.haramadhav.com"
+  },
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "Radar School",
+    "url": "https://radarschool.haramadhav.com",
+    "identifier": "https://doi.org/10.5281/zenodo.20532945"
+  },
+  "image": "https://radarschool.haramadhav.com/assets/stare-dont-spin-picking-radar-citys-sky-radar-z2nmc.png",
+  "datePublished": "2026-06-03",
+  "dateModified": "2026-06-03",
+  "keywords": "radar, staring array, surveillance, counter-UAS, urban airspace"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Saira:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --paper:       #edf1f4;
+    --paper-soft:  #e3e9ef;
+    --panel:       #d8e0e8;
+    --line:        #ccd6df;
+    --fog:         #47596a;
+    --text:        #14222c;
+    --muted:       #7a8896;
+    --accent:      #0e7490;
+    --accent-soft: #2b6b80;
+    --ring:        rgba(20, 48, 64, 0.08);
+    --maxw:        980px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--text);
+    font-family: "Saira", system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: #0a566a; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  /* ---- hero (home) ---- */
+  .hero { position: relative; padding: 110px 0 76px; overflow: hidden; border-bottom: 1px solid var(--line); }
+  .hero .rings, .hero .crosshair, .hero .sweep {
+    position: absolute; top: 50%; left: 50%; width: 1100px; height: 1100px;
+    transform: translate(-50%, -42%); pointer-events: none;
+    -webkit-mask-image: radial-gradient(circle at center, #000 0%, transparent 64%);
+            mask-image: radial-gradient(circle at center, #000 0%, transparent 64%);
+  }
+  .hero .rings { background: repeating-radial-gradient(circle at center, transparent 0, transparent 78px, var(--ring) 79px, var(--ring) 80px); }
+  .hero .crosshair {
+    background:
+      linear-gradient(to right, transparent 49.95%, var(--ring) 50%, transparent 50.05%),
+      linear-gradient(to bottom, transparent 49.95%, var(--ring) 50%, transparent 50.05%);
+  }
+  .hero .sweep {
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, rgba(14,116,144,0.20) 0deg, rgba(14,116,144,0.05) 28deg, transparent 62deg, transparent 360deg);
+    animation: sweep 7.5s linear infinite;
+  }
+  @keyframes sweep { to { transform: translate(-50%, -42%) rotate(360deg); } }
+  .hero-inner { position: relative; z-index: 2; }
+
+  .callsign { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 26px; }
+  h1.wordmark { font-family: "Chakra Petch", sans-serif; font-weight: 700; font-size: clamp(40px, 8vw, 78px); line-height: 1.02; letter-spacing: 0.01em; margin: 0 0 22px; color: var(--text); text-transform: uppercase; }
+  h1.wordmark em { font-style: normal; color: var(--accent); }
+  .lede { font-size: clamp(18px, 2.3vw, 22px); color: var(--fog); font-weight: 400; max-width: 660px; margin: 0; }
+  .band-strip { margin-top: 40px; display: flex; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 3px; overflow: hidden; max-width: 660px; }
+  .band-strip span { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--muted); padding: 9px 14px; border-right: 1px solid var(--line); flex: 1 0 auto; text-align: center; }
+  .band-strip span:last-child { border-right: 0; }
+  .band-strip span.active { color: var(--accent); background: rgba(14,116,144,0.10); }
+
+  /* ---- sections ---- */
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  .section-label { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .section-label::before { content: ""; width: 22px; height: 1px; background: var(--accent-soft); display: inline-block; }
+  h2 { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: clamp(25px, 4vw, 35px); line-height: 1.18; letter-spacing: 0.005em; margin: 0 0 22px; color: var(--text); }
+  p.body { max-width: 680px; color: var(--text); }
+  p.body + p.body { margin-top: 18px; }
+  .approach { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .approach span { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--fog); border: 1px solid var(--line); border-radius: 3px; padding: 7px 13px; background: var(--paper-soft); }
+
+  .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+  @media (max-width: 620px) { .paths { grid-template-columns: 1fr; } }
+  .path-card { display: block; border: 1px solid var(--line); background: var(--paper-soft); border-radius: 4px; padding: 22px 24px; transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease; }
+  .path-card:hover { border-color: var(--accent); background: var(--panel); transform: translateY(-2px); }
+  .path-card .kicker { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .path-card .title { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 20px; color: var(--text); }
+  .path-card .sub { font-size: 15px; color: var(--fog); margin-top: 6px; }
+  .path-card .arrow { color: var(--accent); }
+
+  /* ---- article archive list ---- */
+  .archive { border-top: 1px solid var(--line); margin-top: 8px; }
+  .article-row { display: grid; grid-template-columns: 1fr auto; gap: 26px; align-items: baseline; padding: 24px 4px; border-bottom: 1px solid var(--line); }
+  @media (max-width: 620px) { .article-row { grid-template-columns: 1fr; gap: 10px; } }
+  .article-row .head h3 { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 21px; line-height: 1.2; margin: 0 0 6px; }
+  .article-row .head h3 a { color: var(--text); }
+  .article-row .head h3 a:hover { color: var(--accent); }
+  .article-row .head p { margin: 0; color: var(--fog); font-size: 16px; line-height: 1.5; max-width: 560px; }
+  .article-row .links { display: flex; gap: 14px; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: 0.04em; white-space: nowrap; }
+  .article-row .links a { border-bottom: 1px solid rgba(14,116,144,0.3); padding-bottom: 1px; }
+
+  .cite-box { border: 1px solid var(--line); border-left: 3px solid var(--accent); background: var(--paper-soft); border-radius: 4px; padding: 22px 26px; color: var(--fog); font-size: 16px; margin-top: 6px; }
+  .cite-box .tag { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-soft); display: block; margin-bottom: 10px; }
+  .cite-box img { margin-top: 12px; }
+
+  /* ---- article page ---- */
+  .topbar { border-bottom: 1px solid var(--line); }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 22px; padding-bottom: 22px; }
+  .topbar a.brand { font-family: "Chakra Petch", sans-serif; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text); font-size: 17px; }
+  .topbar a.brand:hover { color: var(--accent); }
+  .topbar .nav { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .article { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+  .article-head { padding: 60px 0 6px; }
+  .article-head .kicker { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 16px; }
+  .article-head h1 { font-family: "Chakra Petch", sans-serif; font-weight: 700; font-size: clamp(30px, 5.4vw, 46px); line-height: 1.1; letter-spacing: 0.005em; margin: 0; color: var(--text); }
+  .cover { width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--line); margin: 30px 0 0; display: block; }
+
+  .article-content { font-size: 18.5px; line-height: 1.78; color: var(--text); padding: 30px 0 10px; }
+  .article-content > *:first-child { margin-top: 0; }
+  .article-content p { margin: 0 0 1.15em; }
+  .article-content h2 { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 26px; line-height: 1.2; margin: 1.8em 0 0.5em; color: var(--text); }
+  .article-content h3 { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 21px; margin: 1.5em 0 0.4em; color: var(--text); }
+  .article-content a { color: var(--accent); border-bottom: 1px solid rgba(14,116,144,0.3); }
+  .article-content blockquote { border-left: 3px solid var(--accent); margin: 1.5em 0; padding: 4px 0 4px 22px; color: var(--fog); font-size: 1.04em; }
+  .article-content blockquote p { margin: 0.3em 0; }
+  .article-content blockquote strong { color: var(--text); }
+  .article-content ul, .article-content ol { padding-left: 1.4em; margin: 0 0 1.15em; }
+  .article-content li { margin-bottom: 0.45em; }
+  .article-content code { font-family: "IBM Plex Mono", monospace; background: var(--paper-soft); padding: 1px 6px; border-radius: 3px; font-size: 0.88em; }
+  .article-content pre { background: var(--paper-soft); border: 1px solid var(--line); border-radius: 5px; padding: 16px; overflow: auto; }
+  .article-content pre code { background: none; padding: 0; }
+  .article-content img { max-width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--line); }
+
+  .article-foot { border-top: 1px solid var(--line); margin-top: 34px; padding: 26px 0 70px; font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: 0.03em; display: flex; gap: 20px; flex-wrap: wrap; }
+
+  /* ---- footer ---- */
+  footer { padding: 50px 0 80px; }
+  .foot-grid { display: flex; flex-wrap: wrap; gap: 30px 50px; align-items: baseline; }
+  .foot-grid .col .lbl { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .foot-grid .col a, .foot-grid .col span { font-size: 16px; }
+  .colophon { margin-top: 40px; font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--muted); letter-spacing: 0.03em; }
+
+  @media (prefers-reduced-motion: reduce) { .hero .sweep { animation: none; opacity: 0.5; } }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <a class="brand" href="/">Radar School</a>
+      <a class="nav" href="/#archive">All articles</a>
+    </div>
+  </div>
+
+  <article class="article">
+    <div class="article-head">
+      <div class="kicker">Radar School</div>
+      <h1>Stare, Don't Spin</h1>
+<img class="cover" src="/assets/stare-dont-spin-picking-radar-citys-sky-radar-z2nmc.png" alt="Stare, Don't Spin" />    </div>
+
+    <div class="article-content">
+      <p>This one is a 101 level chat, the kind of back and forth a millennial and a gen z would have at a whiteboard, so no heavy math, just plain talk.</p>
+<h2>What shape of sky are we protecting?</h2>
+<p>Say someone drops a simple problem on your desk. Keep an eye on the sky over a few city blocks and catch any small drone that drifts in. What is the first thing you ask? Most folks jump straight to how far and how powerful, and the better first question is what shape of sky are we protecting.</p>
+<p>We are not trying to track something forty kilometers out over the open Kansas prairie. Leave the wide open spaces to our KSU friends out in Manhattan, EMAW and all that. Here in Jayhawk country we like our problems a little closer to home, Rock Chalk. This is an urban, commercial setting, the things we care about fly low and slow and close, and mid range is plenty for keeping watch. The moment you accept that, a lot of expensive gear quietly drops off the list.</p>
+<h2>Why spin when you can stare?</h2>
+<p>So if you only need a few kilometers, or even less, why on earth would you strap a heavy antenna to a motor and spin it in circles all day?</p>
+<p>A spinning antenna has one real problem for this kind of job, because it only looks at any one direction once per rotation. Twice if you run two of them back to back, and so on. If a full spin takes a second, a quick little quadcopter weaving between rooftops gets a whole second of being invisible between glances, and a second is a long time when you are trying to react. Think of a cornerback who can only face one way and has to keep whipping his head around to find the ball. By the time he turns back, the receiver is already past him. Add the moving parts, the wear, and the headache of mounting a spinning machine on a rooftop downtown, and the appeal fades fast.</p>
+<p><em>Enter the AESA</em> </p>
+<p>That is where the electronically scanned array comes in, the AESA, short for active electronically scanned array. The name is scarier than the idea. Picture a flat panel packed with a lot of tiny antenna elements, and instead of swinging the whole panel around to aim, each element shifts the timing of its own signal by a sliver so the combined beam points wherever the processor tells it to. Nothing physically moves! The beam hops across the sky in microseconds, checks back on the same drone dozens of times a second, and can even search one chunk of air while tracking a target in another. If you have watched Mahomes read the whole field without turning his back to it, that is the feel of it, eyes everywhere with no wasted motion. And that is the one thing all of us agree on anyway, because Jayhawks, Wildcats, and even our Mizzou neighbors will happily set the trash talk aside on Sundays and cheer for the Chiefs together.</p>
+<blockquote>
+<p><strong>So one good panel and we are done, right?</strong></p>
+</blockquote>
+<p>Almost, except for one physical catch. One panel only sees a cone.</p>
+<p>A flat panel can only push its beam so far off the direction it is facing before things go soft. A decent working rule is that the usable steering lives within roughly sixty degrees on either side of straight ahead, and past that the beam widens and the sensitivity drops. So a single panel never sees the whole sky. It sees a wide cone of it and nothing more.</p>
+<h2>Tile the sky like a good defense</h2>
+<p>Which lands us on the question that actually matters. How do you cover the entire dome above you when each panel only gets a wedge?</p>
+<p>You tile it, <em>Spags</em> style, the same way a good defense covers the field. Picture the sky overhead as a dome, and picture each panel painting one patch onto it, then point a few panels in different directions so their patches cover the whole surface, and let neighbors overlap at the edges so nobody slips through the seam. That overlap is not wasted. Wherever two panels watch the same patch you get two looks at the target, and that is your zone coverage, two defenders bracketing the same receiver so one juke does not spring him loose.</p>
+<blockquote>
+<p><strong>Two panels on the same patch is not waste. It is zone coverage, two defenders bracketing the same receiver.</strong></p>
+</blockquote>
+<h2>How many faces, and how steep</h2>
+<p>A natural first cut puts one panel staring straight up for whatever comes right over the top, with a ring of panels around the sides tilted upward to sweep from near the horizon up to where the top panel takes over. Four sides and a top is the clean starting point. Bump it to five or six sides and you buy roomier overlap at the seams, plus a little insurance if a face ever drops out.</p>
+<p>The tilt on those side panels is the decision that makes or breaks the whole thing. Lay them too flat toward the horizon and you open a ring of blind sky between the sides and the top patch. Crank them too steep and you give up the horizon, which is right where a lot of trouble shows up first. Land them in the middle and the side patches climb just high enough to meet the top patch while still brushing the skyline. Put loosely, if each panel takes in about sixty degrees of elevation, then four sides tilted partway up plus one on top closes the dome with margin to spare, and the narrower each panel&rsquo;s view gets, the more faces you end up adding.</p>
+<h2>Deja vu</h2>
+<p>Notice we never once cracked open a product catalog. We drew the sky we had to cover, counted how many fields of view it takes to tile it with overlap, and the kind of radar more or less picked itself. For an urban, mid range watch, a few staring faces that overlap will beat one tired dish going around in circles. You might have known all of this from cellular communication theory.</p>
+<blockquote>
+<p><strong>The part that should keep you up at night</strong></p>
+</blockquote>
+<p>Now here is the one that should keep you up at night, unless you sat through <em>Prof. Stiles&rsquo;</em> Antenna Theory course at KU. To close the top of the dome you tilt the side faces up, but the more you tilt them, the closer the horizon creeps toward each panel&rsquo;s scan limit, and that is exactly where the beam widens and the gain bottoms out. So the low, slow threat sneaking in along the skyline, the one you most want to catch early and at range, ends up parked in the weakest and blurriest corner of your coverage. Worse, the seam you counted on for redundancy is the place where both neighboring panels are steered near their limits at the same time, so your two looks are also your two worst looks, carrying widened beams, mismatched gain, and a polarization projection that drifts with steering angle. So tell me, without simply slapping on another panel, how would you arrange the faces and share the work between them so your best sensitivity falls where the threat is hardest instead of where it is easiest? Put your approach in the comments.</p>
+<p>#RadarSchool #Radar #CounterUAS #PhasedArray #DroneDetection #RFEngineering #AESA #Electromagnetics #Antenna #SignalProcessing #AntennaDesign #Aerospace #DefenseTech #SensorFusion #UrbanAirspace #CUAS #RadarSchool</p>
+<p>Title image is an example of three flat panels tiling a hemisphere, with the node at the center, each panel painting a sector of sky. Made with the 4cThreat YRKM tool.</p>
+<h2>One simple answer</h2>
+<p>No extra panel required.</p>
+<ol>
+<li>
+<p>Start by pointing your best gain where the hard target is. The instinct is to tilt the side faces up to tidy the geometry, but that shoves the horizon out toward the scan edge. Flip it. Aim each side panel&rsquo;s boresight low, near the skyline where the slow movers come in, so the threat you care about most sits dead center in the beam at full gain, and let the easy stuff overhead live out near the scan edges where a little softness costs you almost nothing. The overhead target is close and slow and you barely need range on it, so you are spending your weakness on purpose.</p>
+</li>
+<li>
+<p>Next, clock the faces so the seams land where you do not care. A seam is your weak spot, two panels both straining at their limits, so rotate the whole array in azimuth until those seams sit over a building face or a direction with no approach, and let a single panel&rsquo;s boresight own the corridor you actually worry about.</p>
+</li>
+<li>
+<p>Then put the electronics and the GPU to work, because an AESA does not owe every direction the same effort. Out toward the degraded edge, where you have given up a couple of decibels to scan loss, dwell longer and integrate more pulses to win that energy back. Here is the lucky part. The beam is already wider out there, so it takes fewer beam positions to fill that patch, which frees up the very time budget you need for the longer dwell.</p>
+</li>
+<li>
+<p>Finally, stop treating the seam as plain redundancy and start treating it as one shared aperture. Two mediocre looks are not just a backup for each other. Combine them, non-coherently for a quick few decibels, or coherently across the two faces if you can phase align them, and the two fuzzy fixes average into a sharper one, with the bonus that two faces viewing from different angles pin the target&rsquo;s bearing better than either alone. Round it off with dual-polarized elements so the polarization drift at the edge stops quietly eating your returns.</p>
+</li>
+</ol>
+<p>Put those FOUR moves together and the design stops chasing pretty symmetry and starts SEEing the THREAT. Your strongest beam points at the horizon, your seams hide over dead ground, your dwell stretches to cover the scan loss, and your overlap turns into a little distributed array right where each face is at its worst.</p>
+<blockquote>
+<p><strong>Shape the coverage around where the problem lives, not around where the geometry is easy.</strong></p>
+</blockquote>
+<h2>Coming in the 201</h2>
+<p>Now, when you move up to the 201 level, there is the problem of nearby structures. Sometimes that turns into a solution too.</p>
+<p>Authors. Hara Madhav Talasila, PhD and Gordon Ariho . Two Jayhawks who like to teach.</p>
+    </div>
+
+    <div class="article-foot">
+<a href="https://www.linkedin.com/pulse/stare-dont-spin-picking-radar-citys-sky-radar-z2nmc/" target="_blank" rel="noopener">Originally on LinkedIn &rarr;</a>      <a href="/#archive">Back to all articles</a>
+      <a href="https://doi.org/10.5281/zenodo.20532945">Series DOI</a>
+    </div>
+  </article>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="col"><div class="lbl">Author</div><span>Hara Madhav Talasila</span></div>
+      <div class="col"><div class="lbl">Home</div><a href="https://haramadhav.com" target="_blank" rel="noopener">haramadhav.com</a></div>
+      <div class="col"><div class="lbl">Source</div><a href="https://github.com/radarschool" target="_blank" rel="noopener">github.com/radarschool</a></div>
+      <div class="col"><div class="lbl">LinkedIn</div><a href="https://www.linkedin.com/in/haramadhav/" target="_blank" rel="noopener">in/haramadhav</a></div>
+      <div class="col"><div class="lbl">ORCID</div><a href="https://orcid.org/0000-0002-6209-3121" target="_blank" rel="noopener">0000-0002-6209-3121</a></div>
+    </div>
+    <div class="colophon">Radar School &middot; radarschool.haramadhav.com &middot; theory, examples, applications, code, and hardware.</div>
+  </div>
+</footer>
+</body>
+</html>

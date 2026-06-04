@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Why Multi-Sensor Fusion Is a Phrase That Often Does Not Work · Radar School</title>
+<meta name="description" content="Fusing radar, EO, IR, RF, and acoustic data is harder than the phrase suggests, and the failure modes are usually in the assumptions rather than the algorithms." />
+<link rel="canonical" href="https://radarschool.haramadhav.com/articles/why-multi-sensor-fusion-phrase-often-does-work-radar-oab0c/" />
+
+<meta name="author" content="Hara Madhav Talasila" />
+<meta property="og:title" content="Why Multi-Sensor Fusion Is a Phrase That Often Does Not Work" />
+<meta property="og:description" content="Fusing radar, EO, IR, RF, and acoustic data is harder than the phrase suggests, and the failure modes are usually in the assumptions rather than the algorithms." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://radarschool.haramadhav.com/articles/why-multi-sensor-fusion-phrase-often-does-work-radar-oab0c/" />
+<meta property="og:site_name" content="Radar School" />
+<meta property="og:image" content="https://radarschool.haramadhav.com/assets/why-multi-sensor-fusion-phrase-often-does-work-radar-oab0c.png" /><meta name="twitter:card" content="summary_large_image" />
+
+<meta name="citation_title" content="Why Multi-Sensor Fusion Is a Phrase That Often Does Not Work" />
+<meta name="citation_author" content="Hara Madhav Talasila" />
+<meta name="citation_publication_date" content="2026/05/23" /><meta name="citation_technical_report_institution" content="Radar School" />
+<meta name="citation_publisher" content="Radar School" />
+<meta name="citation_abstract_html_url" content="https://radarschool.haramadhav.com/articles/why-multi-sensor-fusion-phrase-often-does-work-radar-oab0c/" />
+<meta name="citation_keywords" content="sensor fusion; radar; multi-sensor; estimation; tracking" /><meta name="citation_language" content="en" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Why Multi-Sensor Fusion Is a Phrase That Often Does Not Work",
+  "description": "Fusing radar, EO, IR, RF, and acoustic data is harder than the phrase suggests, and the failure modes are usually in the assumptions rather than the algorithms.",
+  "url": "https://radarschool.haramadhav.com/articles/why-multi-sensor-fusion-phrase-often-does-work-radar-oab0c/",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://radarschool.haramadhav.com/articles/why-multi-sensor-fusion-phrase-often-does-work-radar-oab0c/"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Hara Madhav Talasila",
+    "url": "https://orcid.org/0000-0002-6209-3121"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Radar School",
+    "url": "https://radarschool.haramadhav.com"
+  },
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "Radar School",
+    "url": "https://radarschool.haramadhav.com",
+    "identifier": "https://doi.org/10.5281/zenodo.20532945"
+  },
+  "image": "https://radarschool.haramadhav.com/assets/why-multi-sensor-fusion-phrase-often-does-work-radar-oab0c.png",
+  "datePublished": "2026-05-23",
+  "dateModified": "2026-05-23",
+  "keywords": "sensor fusion, radar, multi-sensor, estimation, tracking"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Saira:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --paper:       #edf1f4;
+    --paper-soft:  #e3e9ef;
+    --panel:       #d8e0e8;
+    --line:        #ccd6df;
+    --fog:         #47596a;
+    --text:        #14222c;
+    --muted:       #7a8896;
+    --accent:      #0e7490;
+    --accent-soft: #2b6b80;
+    --ring:        rgba(20, 48, 64, 0.08);
+    --maxw:        980px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--text);
+    font-family: "Saira", system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: #0a566a; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  /* ---- hero (home) ---- */
+  .hero { position: relative; padding: 110px 0 76px; overflow: hidden; border-bottom: 1px solid var(--line); }
+  .hero .rings, .hero .crosshair, .hero .sweep {
+    position: absolute; top: 50%; left: 50%; width: 1100px; height: 1100px;
+    transform: translate(-50%, -42%); pointer-events: none;
+    -webkit-mask-image: radial-gradient(circle at center, #000 0%, transparent 64%);
+            mask-image: radial-gradient(circle at center, #000 0%, transparent 64%);
+  }
+  .hero .rings { background: repeating-radial-gradient(circle at center, transparent 0, transparent 78px, var(--ring) 79px, var(--ring) 80px); }
+  .hero .crosshair {
+    background:
+      linear-gradient(to right, transparent 49.95%, var(--ring) 50%, transparent 50.05%),
+      linear-gradient(to bottom, transparent 49.95%, var(--ring) 50%, transparent 50.05%);
+  }
+  .hero .sweep {
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, rgba(14,116,144,0.20) 0deg, rgba(14,116,144,0.05) 28deg, transparent 62deg, transparent 360deg);
+    animation: sweep 7.5s linear infinite;
+  }
+  @keyframes sweep { to { transform: translate(-50%, -42%) rotate(360deg); } }
+  .hero-inner { position: relative; z-index: 2; }
+
+  .callsign { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 26px; }
+  h1.wordmark { font-family: "Chakra Petch", sans-serif; font-weight: 700; font-size: clamp(40px, 8vw, 78px); line-height: 1.02; letter-spacing: 0.01em; margin: 0 0 22px; color: var(--text); text-transform: uppercase; }
+  h1.wordmark em { font-style: normal; color: var(--accent); }
+  .lede { font-size: clamp(18px, 2.3vw, 22px); color: var(--fog); font-weight: 400; max-width: 660px; margin: 0; }
+  .band-strip { margin-top: 40px; display: flex; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 3px; overflow: hidden; max-width: 660px; }
+  .band-strip span { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--muted); padding: 9px 14px; border-right: 1px solid var(--line); flex: 1 0 auto; text-align: center; }
+  .band-strip span:last-child { border-right: 0; }
+  .band-strip span.active { color: var(--accent); background: rgba(14,116,144,0.10); }
+
+  /* ---- sections ---- */
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  .section-label { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .section-label::before { content: ""; width: 22px; height: 1px; background: var(--accent-soft); display: inline-block; }
+  h2 { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: clamp(25px, 4vw, 35px); line-height: 1.18; letter-spacing: 0.005em; margin: 0 0 22px; color: var(--text); }
+  p.body { max-width: 680px; color: var(--text); }
+  p.body + p.body { margin-top: 18px; }
+  .approach { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .approach span { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--fog); border: 1px solid var(--line); border-radius: 3px; padding: 7px 13px; background: var(--paper-soft); }
+
+  .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+  @media (max-width: 620px) { .paths { grid-template-columns: 1fr; } }
+  .path-card { display: block; border: 1px solid var(--line); background: var(--paper-soft); border-radius: 4px; padding: 22px 24px; transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease; }
+  .path-card:hover { border-color: var(--accent); background: var(--panel); transform: translateY(-2px); }
+  .path-card .kicker { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .path-card .title { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 20px; color: var(--text); }
+  .path-card .sub { font-size: 15px; color: var(--fog); margin-top: 6px; }
+  .path-card .arrow { color: var(--accent); }
+
+  /* ---- article archive list ---- */
+  .archive { border-top: 1px solid var(--line); margin-top: 8px; }
+  .article-row { display: grid; grid-template-columns: 1fr auto; gap: 26px; align-items: baseline; padding: 24px 4px; border-bottom: 1px solid var(--line); }
+  @media (max-width: 620px) { .article-row { grid-template-columns: 1fr; gap: 10px; } }
+  .article-row .head h3 { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 21px; line-height: 1.2; margin: 0 0 6px; }
+  .article-row .head h3 a { color: var(--text); }
+  .article-row .head h3 a:hover { color: var(--accent); }
+  .article-row .head p { margin: 0; color: var(--fog); font-size: 16px; line-height: 1.5; max-width: 560px; }
+  .article-row .links { display: flex; gap: 14px; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: 0.04em; white-space: nowrap; }
+  .article-row .links a { border-bottom: 1px solid rgba(14,116,144,0.3); padding-bottom: 1px; }
+
+  .cite-box { border: 1px solid var(--line); border-left: 3px solid var(--accent); background: var(--paper-soft); border-radius: 4px; padding: 22px 26px; color: var(--fog); font-size: 16px; margin-top: 6px; }
+  .cite-box .tag { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-soft); display: block; margin-bottom: 10px; }
+  .cite-box img { margin-top: 12px; }
+
+  /* ---- article page ---- */
+  .topbar { border-bottom: 1px solid var(--line); }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 22px; padding-bottom: 22px; }
+  .topbar a.brand { font-family: "Chakra Petch", sans-serif; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text); font-size: 17px; }
+  .topbar a.brand:hover { color: var(--accent); }
+  .topbar .nav { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .article { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+  .article-head { padding: 60px 0 6px; }
+  .article-head .kicker { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 16px; }
+  .article-head h1 { font-family: "Chakra Petch", sans-serif; font-weight: 700; font-size: clamp(30px, 5.4vw, 46px); line-height: 1.1; letter-spacing: 0.005em; margin: 0; color: var(--text); }
+  .cover { width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--line); margin: 30px 0 0; display: block; }
+
+  .article-content { font-size: 18.5px; line-height: 1.78; color: var(--text); padding: 30px 0 10px; }
+  .article-content > *:first-child { margin-top: 0; }
+  .article-content p { margin: 0 0 1.15em; }
+  .article-content h2 { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 26px; line-height: 1.2; margin: 1.8em 0 0.5em; color: var(--text); }
+  .article-content h3 { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 21px; margin: 1.5em 0 0.4em; color: var(--text); }
+  .article-content a { color: var(--accent); border-bottom: 1px solid rgba(14,116,144,0.3); }
+  .article-content blockquote { border-left: 3px solid var(--accent); margin: 1.5em 0; padding: 4px 0 4px 22px; color: var(--fog); font-size: 1.04em; }
+  .article-content blockquote p { margin: 0.3em 0; }
+  .article-content blockquote strong { color: var(--text); }
+  .article-content ul, .article-content ol { padding-left: 1.4em; margin: 0 0 1.15em; }
+  .article-content li { margin-bottom: 0.45em; }
+  .article-content code { font-family: "IBM Plex Mono", monospace; background: var(--paper-soft); padding: 1px 6px; border-radius: 3px; font-size: 0.88em; }
+  .article-content pre { background: var(--paper-soft); border: 1px solid var(--line); border-radius: 5px; padding: 16px; overflow: auto; }
+  .article-content pre code { background: none; padding: 0; }
+  .article-content img { max-width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--line); }
+
+  .article-foot { border-top: 1px solid var(--line); margin-top: 34px; padding: 26px 0 70px; font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: 0.03em; display: flex; gap: 20px; flex-wrap: wrap; }
+
+  /* ---- footer ---- */
+  footer { padding: 50px 0 80px; }
+  .foot-grid { display: flex; flex-wrap: wrap; gap: 30px 50px; align-items: baseline; }
+  .foot-grid .col .lbl { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .foot-grid .col a, .foot-grid .col span { font-size: 16px; }
+  .colophon { margin-top: 40px; font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--muted); letter-spacing: 0.03em; }
+
+  @media (prefers-reduced-motion: reduce) { .hero .sweep { animation: none; opacity: 0.5; } }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <a class="brand" href="/">Radar School</a>
+      <a class="nav" href="/#archive">All articles</a>
+    </div>
+  </div>
+
+  <article class="article">
+    <div class="article-head">
+      <div class="kicker">Radar School</div>
+      <h1>Why Multi-Sensor Fusion Is a Phrase That Often Does Not Work</h1>
+<img class="cover" src="/assets/why-multi-sensor-fusion-phrase-often-does-work-radar-oab0c.png" alt="Why Multi-Sensor Fusion Is a Phrase That Often Does Not Work" />    </div>
+
+    <div class="article-content">
+      <p>This article is mathematically aimed at counter-unmanned aerial systems (C-UAS) application. Radar, along with other sensors, could be a big asset in detection and tracking UAS (drones for example).</p>
+<p>A note on tone before we begin. This piece is intentionally casual. Half technical article (EECS 965 Detection and Estimation Theory), half conversation with whoever has been thinking about the same problems we have. If you want the formal treatment, that is coming in a peer-reviewed paper. Today we want to walk you through how we actually think about this, with the same kind of asides Prof. Jim Stiles used to put in his lecture slides at KU. The man would put Homer Simpson in the middle of a Cramér-Rao derivation if the moment called for it, and we have never forgotten how much that helped the material stick. So here we go.</p>
+<h2>The Question Nobody Wants You to Ask</h2>
+<p>Most Counter-UAS tech sheets we have seen open with a sensor list. Radar. Camera. RF. Acoustic. Maybe a glossy spec table. The implicit promise is that with enough boxes on the system diagram, the drone problem is solved.</p>
+<p>There is a question that punctures that promise immediately. </p>
+<blockquote>
+<p><strong>Given the sensors you have, with the noise floors they actually have, and the detection probabilities they actually have, what is the best position accuracy and the best classification reliability that any algorithm in the world can achieve from them? And does that ceiling actually clear your mission requirement?</strong></p>
+</blockquote>
+<p>That is a very different question than <em>&ldquo;which sensor should I buy.&rdquo;</em> And almost nobody in the commercial C-UAS space has a clean answer to it. The honest reason is that answering it requires the kind of estimation-theory machinery that lives in graduate radar courses and IEEE Transactions papers, not in product brochures.</p>
+<p>This article is our attempt to bring a little of that theory into daylight. We are working on the formal publication. Today we want to share the reasoning behind it, casually, because the conclusions matter for anybody buying or building or evaluating these systems.</p>
+<h2>Why?</h2>
+<p>Most of the framework we are about to describe started, for both of us, in EECS 965 Detection and Estimation Theory at the University of Kansas, taught by Prof. Jim Stiles. We were classmates in that course and we have been thinking about these problems together ever since. Anybody who has sat in that classroom knows what we mean when we say <em>his slides are the best</em>. Cramér-Rao Bound on slide 10, Professor Shannon Blunt on slide 20, Professor Demarest next to del operators, and a large number of Homer Simpsons everywhere. Somehow the entire room understood Fisher information better because of it. He taught the Cramér-Rao Bound the right way. Not as a formula you memorize, but as a statement about the nature of information and what it permits.</p>
+<p>Who is Homer Simpson? Check this out -  https://en.wikipedia.org/wiki/Homer_Simpson</p>
+<p>The cliché applies. We love it when a plan comes together. The A-Team had Hannibal saying that with a cigar. We get to say it when a Posterior Cramér-Rao recursion lines up with a Monte Carlo and confirms that a sensor suite we are evaluating has the headroom the customer needs. Different theater, same satisfaction.</p>
+<h2>&ldquo;Multi-Sensor Fusion&rdquo; Is Often a Phrase That Does No Work</h2>
+<p>&ldquo;Multi-sensor fusion&rdquo; usually means we have a few different sensors, and we combine their outputs somehow. That is fine as far as it goes. It says nothing about whether the combination is doing anything close to what physics allows.</p>
+<p>Imagine a small low-cost quadcopter hovering at 500 meters. You have a 77 GHz (ish) millimeter-wave radar. At that range, against that target, your radar&rsquo;s detection probability might be 0.85. Your electro-optical camera in daylight might be at 0.70. Your acoustic array is essentially napping at 500 meters because sound does not carry that far through ambient noise (unless you deployed an acoustic network). Your passive RF receiver is strong if the drone is chatting, but if the drone is fiber-tethered with no radio link at all, the RF receiver is staring at zero.</p>
+<blockquote>
+<p><strong>Now, the actual question. What is the best position accuracy any algorithm could possibly squeeze out of fusing those sensors? Not what your specific tracker does. What can any tracker do?</strong></p>
+</blockquote>
+<p>This is the question that the Cramér-Rao Bound was invented for.</p>
+<h2>Lets Start With Fisher Information</h2>
+<p>Before the bound, there is the concept of Fisher information. Prof. Fisher was Prof. Rao&rsquo;s advisor. History on Statistics another day! or look up a few legends. <em>Ronald Aylmer Fisher, Harald Cramér, and Calyampudi RadhaKrishna Rao.</em></p>
+<p>Here is a simple version.</p>
+<p>Imagine you are trying to figure out where something is, and you have a noisy measurement of it. The Fisher information of that measurement is, roughly, how much the measurement reacts when the target moves a little. If a small movement causes a big change in the measurement distribution, you have a sensitive sensor and you can pin down the target. If the target can move significantly and the measurement barely flinches, the sensor is more decorative than informational.</p>
+<p>A radio dial analogy works well. If turning the dial a millimeter completely changes the station, the dial is informationally rich at that point. If you turn it an inch and nothing changes, you are in a dead zone. Fisher information formalizes that idea for the problem of estimating target state.</p>
+<p>For a sensor with Gaussian noise, there is a clean recipe. Take how sensitive each measurement is to each component of the target state. Weight by how noisy each measurement is. Combine. You get a matrix, called the Fisher Information Matrix, that summarizes how much each part of the target state is observable through that one sensor. Big numbers in the position rows? You can localize. Zeros in the range row? You cannot tell how far away the target is from this sensor at all.</p>
+<p>The Cramér-Rao Bound then says that the error covariance of any unbiased estimator is at least the inverse of the Fisher Information Matrix. There is a floor on how well you can estimate the target state, and the floor is set by the physics of the sensor and the geometry. No clever algorithm beats it. Maximum likelihood approaches it. Nothing goes below it.</p>
+<p>This is Hannibal-level satisfying when you finally understand it. The universe has a built-in budget for how informative a noisy measurement can be, and the budget is computable.</p>
+<h2>The Detection Probability and Cramér-Rao Bound</h2>
+<p>Here is where the standard textbook treatment runs out of road for our problem.</p>
+<p>The classical Cramér-Rao Bound assumes you always get a measurement. In real radar, you do not. At 500 meters against a low-cross-section drone, the radar might return nothing on 15 out of 100 scans. The camera in fog might miss frames. The acoustic array might be below threshold most of the time.</p>
+<p>So we have to modulate the information. A sensor can only contribute to your estimate during the scans when it actually detects the target. If it detects 90% of the time, it contributes 90% of its theoretical Fisher Information Matrix on average. If it detects 0% of the time, it contributes nothing. Like that one friend who shows up to brunch when they feel like it. The average usefulness depends on attendance.</p>
+<p>That gives a clean rule for combining sensors. The joint modulated Fisher Information Matrix is the sum of each sensor&rsquo;s matrix, each one scaled by that sensor&rsquo;s detection probability at the current target state. The Cramér-Rao Bound on the fused estimate is the inverse of that sum.</p>
+<p>Three things drop out of this that are easy to miss until you write it down.</p>
+<ol>
+<li>
+<p>Adding a sensor never hurts. Every contribution is non-negative. Adding any sensor to the suite tightens the floor on estimation error, even if the sensor is mediocre. The bound monotonically improves.</p>
+</li>
+<li>
+<p>A sensor with zero detection probability contributes exactly zero. Not small. Not negligible. Zero! A passive RF receiver against a fiber-tethered drone is the sensor that did not show up to brunch. It might as well not exist for that target class.</p>
+</li>
+<li>
+<p>The bound depends on the target geometry. It is not a single number for your system. It is a surface over the engagement space. At short range, with high detection probabilities, the bound is tight. At long range, as detections drop, the bound loosens. The performance you can claim depends on where the target is, not just on what sensors you have.</p>
+</li>
+</ol>
+<h2>If Scientists Talk (Without Equations, Of Course)</h2>
+<p>Let us make this concrete. Single 77 GHz FMCW radar. Target is a small quadcopter at 400 meters range and 40 meters altitude, moving toward the sensor at about 5 meters per second. Drone cross section roughly 0.01 square meters, which at 77 GHz is roughly the radar reflectivity of a medium-sized bird like a pigeon. Question. <em>What is the lower bound on position estimation accuracy?</em></p>
+<p><strong>Step one. What does the sensor measure?</strong> The radar gives back four things per scan. Distance to the target. The rate at which that distance is changing (Doppler). The two angles that locate the target in the sky (azimuth and elevation). Each is a function of the target&rsquo;s three-dimensional position and three-dimensional velocity.</p>
+<p><strong>Step two. How noisy is each measurement?</strong> For an FMCW radar with 1 GHz sweep bandwidth and a 100 ms coherent processing interval, the measurement uncertainties at the detection-threshold operating point are roughly ten centimeters in range, twenty centimeters per second in range rate, and half a degree in each angle. These numbers come from the ambiguity function of the waveform, which sets the physical floor for what one coherent processing interval can resolve at a given signal-to-noise ratio. At higher SNR (closer in or against a brighter target), these uncertainties scale down with the square root of SNR. The Cramér-Rao Bound captures that scaling exactly.</p>
+<p><strong>Step three. How sensitive is each measurement to target motion?</strong> This is the derivative step. The range measurement reacts most strongly to motion along the line of sight. The azimuth angle reacts to lateral motion but is completely blind to motion directly toward or away from the sensor. Elevation reacts to vertical motion. The Doppler reacts to velocity components along the line of sight but is blind to transverse velocity. What comes out of this step is a table of sensitivities, one row per measurement, one column per target state component.</p>
+<p><strong>Step four. Combine sensitivity and noise into the Fisher Information Matrix.</strong> Weight each row by the inverse of its noise variance. Sum the contributions. You get a six-by-six matrix that summarizes everything this radar knows about the target&rsquo;s state from one scan. The structure of this matrix has a nice geometric reading. Range contributes information along the line of sight. Angles contribute information perpendicular to the line of sight. Together, they cover all three spatial dimensions. This is why a single radar can localize in 3D from a single site, while a single camera, which only measures angles, cannot.</p>
+<p><strong>Step five. Detection probability.</strong> Using the radar equation with parameters representative of high-end commercial C-UAS radars (transmit power on the order of one watt, antenna gain around 25 dBi each on transmit and receive, coherent integration over a 100 ms dwell), the post-CPI signal-to-noise ratio at 400 meters against a 0.01 square meter target works out to around 23 decibels. For a fluctuating-target detector model, that maps to a detection probability of roughly 0.93 at a reasonable false alarm rate. A bare automotive-class chip at the same range against the same target would land much lower in SNR and much lower in Pd, which is exactly why dedicated C-UAS radars exist as a separate product category.</p>
+<p><strong>Step six. Modulate and invert.</strong> Multiply the Fisher Information Matrix by 0.93. Take its inverse, restricted to the position components. The square root of the trace of that block gives you the position root-mean-square error lower bound. At this geometry, the range component (along the line of sight) is on the order of a few centimeters, but the cross-range component (perpendicular to the line of sight) is much larger, because angular accuracy of around half a degree projects to a couple of meters at 400 meters range. The full 3D position RMSE bound from radar alone is therefore around 3 meters, dominated entirely by cross-range. The &ldquo;radar gives you precise range and approximate angles&rdquo; pattern that operators know intuitively falls out of the bound directly.</p>
+<p><strong>Step seven. Add a camera and watch the information accumulate.</strong> A high-resolution electro-optical camera at 400 meters might have angular noise of 0.02 degrees, which is much tighter than the radar&rsquo;s half-degree angles. Detection probability around 0.78. The camera measures only the two angles, no range, so its Fisher Information Matrix has the same angular rows but a missing range row. By itself, the camera&rsquo;s matrix is rank-deficient in the range direction. There is literally zero information about how far away the target is from angles measured at a single site. Together with the radar, the joint modulated matrix combines the radar&rsquo;s range coverage with the camera&rsquo;s tighter angular coverage. The cross-range component drops from 2 meters down to roughly 16 centimeters because the camera&rsquo;s angular precision dominates the fused angle bound. </p>
+<p>The 3D position RMSE bound is now around 22 centimeters, an order-of-magnitude improvement over radar alone. The radar carries the range. The camera refines the angles. Neither one alone gets you to 3D. And there it is, the plan coming together, A-Team theme playing softly in the background.</p>
+<h2>Classification Is a Separate Problem With Its Own Floor</h2>
+<p>Everything above is kinematics. Where is the target, how fast is it moving. The C-UAS operator also needs to know what the target is. Is it a drone or a Canada goose. Is it a consumer Mavic or a fiber-tethered FPV with no radio.</p>
+<p>The classification problem has its own information-theoretic bound, completely separate from the localization bound. The relevant concept here is the Bhattacharyya distance between class-conditional distributions. Mouthful of a name. Yup! Another Indian. Statistics history another day! or look up <em>Anil Kumar Bhattacharyya.</em></p>
+<p>Picture it this way. Suppose you plotted the radar micro-Doppler signature of every drone you ever measured, and on top of that you plotted the same signature for every bird. If the two clouds of dots are well separated, the radar has high Bhattacharyya distance for the drone-versus-bird pair, and it is a useful classification sensor. If the clouds overlap heavily, the radar cannot tell them apart.</p>
+<p>The result that matters is that when sensors are conditionally independent, those class-separation distances add across sensors. Each new sensor that distinguishes the classes at all reduces the classification error ceiling. The reductions compound. This is why even a modestly discriminative sensor is worth adding to the suite, as long as it sees something the others do not.</p>
+<p>Now for the operationally striking part. Against a fiber-tethered RF-silent FPV drone, the passive RF receiver gives you zero classification information between the drone class and the bird class. The RF channel is closed. The receiver is napping. Done! Meanwhile the acoustic array, which is useless for localization at most engagement ranges, gives you strong classification information through the harmonic motor signature that rotorcraft have and birds do not. When RF goes silent, the acoustic array carries the majority of the classification information. That is not something you would conclude from a feature spreadsheet. It falls out of the framework directly.</p>
+<p>We have heard people describe this kind of result as &ldquo;fusion magic.&rdquo; It is not magic. It is the bound math telling you which sensor is doing real work and which one is decorative against a particular threat. The same way Despicable Me&rsquo;s Minions clearly serve different roles depending on the heist. Some carry the gold. Some just press the wrong button at the wrong time. You want the bound math to tell you which is which before you pay for either.</p>
+<h2>Why This Matters for 4cThreat</h2>
+<p>The reason we built our sensor architecture around the theory rather than around a feature list is precisely this. Without the information-theoretic framework, there is no principled way to know whether the suite you have assembled meets the operational requirement you have stated. You can tune your algorithm, gather field data, and report a performance number against a specific target on a specific day. But you cannot tell whether that number represents the best the physics allows, or whether you are well below the ceiling and a different algorithm would close the gap.</p>
+<blockquote>
+<p><strong>The bound gives you the ceiling. The algorithm tells you where you are. The gap between them tells you whether to invest in better algorithms or better hardware. That is a procurement decision you can actually defend, not a gut call dressed up in marketing language.</strong></p>
+</blockquote>
+<p>We are writing this up formally for a peer-reviewed publication. What is in this article is maybe one percent of the depth. A sketch of the first theorem, missing the tracking-over-time generalization, the full classification bound, the joint operational design surface, and the systematic sensor-subset optimization that lets you pick the cheapest suite that meets a mission specification. But the shape of the reasoning is the same throughout. Frame the problem as estimation. Compute the information-theoretic bound. Let the bound drive design.</p>
+<p>To be clear, none of the individual pieces are new. The Cramér-Rao Bound has been in textbooks since the 1940s. The Posterior CRB for tracking was published by Tichavský and colleagues in 1998. The Bhattacharyya bound has been in the pattern recognition literature for decades. What is novel, and what we are formalizing, is the joint application of these tools to the specific problem of heterogeneous sensors, imperfect detection, and simultaneous classification-plus-localization that defines the modern C-UAS domain. That joint formulation, to our knowledge, does not exist in the peer-reviewed record.</p>
+<h2>Questions Worth Asking Your Vendor (or Yourself)</h2>
+<p>If you are interested in C-UAS at any level, we would encourage you to ask these of any system you are evaluating.</p>
+<p><strong>What is the claimed detection probability, and against what target cross section, at what range, in what weather?</strong> Detection probability is not a sensor property in isolation. It is a property of sensor, target, geometry, and threshold. A 98% detection probability number against a large calibration sphere at optimal range does not tell you what happens against a carbon-fiber FPV at 500 meters in clutter.</p>
+<p><strong>How does the claimed position accuracy compare to the theoretical floor?</strong> If the gap is small, the algorithm is doing real work. If the gap is large, either there is algorithmic headroom or the bound was never computed. Both are diagnostic. The second is also a credibility signal.</p>
+<p><strong>What is the published performance against RF-silent threats specifically?</strong> If the answer is identical to the RF-emitting case, somebody either has an unusually capable radar and optical stack, or the test set did not include the harder case.</p>
+<p><strong>What breaks when you remove one sensor?</strong> If pulling one sensor collapses performance, that is sensor dependence, not sensor fusion. Real fusion degrades gracefully because information is distributed across modalities.</p>
+<p>These questions do not require knowing the Cramér-Rao Bound. But once the bound is in your hands, the answers become auditable. That is the whole point.</p>
+<p><strong>A note on the title.</strong> &ldquo;Multi-sensor fusion&rdquo; is the phrase, but the phrase by itself promises nothing. Without the math that says how much information each sensor actually adds, against which target, in which geometry, fusion is just a label on a sensor list. The bound is what turns the phrase into work.</p>
+<p>If you work in detection and estimation theory, radar systems, or C-UAS and you want to compare notes, our inboxes are open from Fall 2026.</p>
+<p>And yes. We love it when a plan comes together.</p>
+<p>Authors. Hara Madhav Talasila, PhD and Gordon Ariho. Classmates in EECS 965, lab mates at KU, and now collaborators on the formal write-up.</p>
+<p>#CounterUAS #DroneDefense #RadarSystems #SensorFusion #EstimationTheory #FisherInformation #4cThreat #CriticalInfrastructure #Defense #EECS #SignalProcessing</p>
+    </div>
+
+    <div class="article-foot">
+<a href="https://www.linkedin.com/pulse/why-multi-sensor-fusion-phrase-often-does-work-radar-oab0c/" target="_blank" rel="noopener">Originally on LinkedIn &rarr;</a>      <a href="/#archive">Back to all articles</a>
+      <a href="https://doi.org/10.5281/zenodo.20532945">Series DOI</a>
+    </div>
+  </article>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="col"><div class="lbl">Author</div><span>Hara Madhav Talasila</span></div>
+      <div class="col"><div class="lbl">Home</div><a href="https://haramadhav.com" target="_blank" rel="noopener">haramadhav.com</a></div>
+      <div class="col"><div class="lbl">Source</div><a href="https://github.com/radarschool" target="_blank" rel="noopener">github.com/radarschool</a></div>
+      <div class="col"><div class="lbl">LinkedIn</div><a href="https://www.linkedin.com/in/haramadhav/" target="_blank" rel="noopener">in/haramadhav</a></div>
+      <div class="col"><div class="lbl">ORCID</div><a href="https://orcid.org/0000-0002-6209-3121" target="_blank" rel="noopener">0000-0002-6209-3121</a></div>
+    </div>
+    <div class="colophon">Radar School &middot; radarschool.haramadhav.com &middot; theory, examples, applications, code, and hardware.</div>
+  </div>
+</footer>
+</body>
+</html>

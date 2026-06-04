@@ -7,10 +7,10 @@ authors:
     family-names: Talasila
     orcid: "https://orcid.org/0000-0002-6209-3121"
 abstract: >-
-  Radar School is a radar education series covering RF
-  hardware, signal processing, electromagnetics, and remote sensing. Articles
-  are first published on LinkedIn and archived here in Markdown and PDF for
-  long-term preservation and citation.
+  Radar School is a radar education series covering RF hardware, signal
+  processing, electromagnetics, and remote sensing. Articles are first
+  published on LinkedIn and archived here in HTML and PDF for long-term
+  preservation and citation.
 keywords:
   - radar
   - electromagnetics
