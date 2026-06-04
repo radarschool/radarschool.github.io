@@ -2,7 +2,7 @@
 
 A radar education series by Hara Madhav Talasila, covering RF hardware, signal processing, electromagnetics, and remote sensing.
 
-Articles are first published on LinkedIn and archived here as finished HTML for readability, preservation, and citation. This repository serves the public site at **https://radarschool.haramadhav.com**.
+Articles are first published on LinkedIn and archived here as finished HTML and PDF for readability, preservation, and citation. This repository serves the public site at **https://radarschool.haramadhav.com**.
 
 ## What is here
 
