@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>From Long Waves to the Cavity Magnetron · Radar School</title>
+<meta name="description" content="How the scattered physics of radio detection was turned into a working instrument across the 1930s and 1940s, the device that pushed it down to microwave wavelengths, the economies that paid for it, and where the word radar came from." />
+<link rel="canonical" href="https://radarschool.haramadhav.com/articles/from-long-waves-to-the-cavity-magnetron/" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta name="theme-color" content="#0e7490" />
+
+<meta name="author" content="Hara Madhav Talasila" />
+<meta property="og:title" content="From Long Waves to the Cavity Magnetron" />
+<meta property="og:description" content="How the scattered physics of radio detection was turned into a working instrument across the 1930s and 1940s, the device that pushed it down to microwave wavelengths, the economies that paid for it, and where the word radar came from." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://radarschool.haramadhav.com/articles/from-long-waves-to-the-cavity-magnetron/" />
+<meta property="og:site_name" content="Radar School" />
+<meta property="og:image" content="https://radarschool.haramadhav.com/assets/from-long-waves-to-the-cavity-magnetron.png" /><meta name="twitter:card" content="summary_large_image" />
+
+<meta name="citation_title" content="From Long Waves to the Cavity Magnetron" />
+<meta name="citation_author" content="Hara Madhav Talasila" />
+<meta name="citation_publication_date" content="2026/06/11" /><meta name="citation_technical_report_institution" content="Radar School" />
+<meta name="citation_publisher" content="Radar School" />
+<meta name="citation_abstract_html_url" content="https://radarschool.haramadhav.com/articles/from-long-waves-to-the-cavity-magnetron/" />
+<meta name="citation_keywords" content="radar history; cavity magnetron; Yagi-Uda antenna; Chain Home; RADAR acronym; microwave engineering; radio detection" /><meta name="citation_language" content="en" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "From Long Waves to the Cavity Magnetron",
+  "description": "How the scattered physics of radio detection was turned into a working instrument across the 1930s and 1940s, the device that pushed it down to microwave wavelengths, the economies that paid for it, and where the word radar came from.",
+  "url": "https://radarschool.haramadhav.com/articles/from-long-waves-to-the-cavity-magnetron/",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://radarschool.haramadhav.com/articles/from-long-waves-to-the-cavity-magnetron/"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Hara Madhav Talasila",
+    "url": "https://orcid.org/0000-0002-6209-3121"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Radar School",
+    "url": "https://radarschool.haramadhav.com"
+  },
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "Radar School",
+    "url": "https://radarschool.haramadhav.com",
+    "identifier": "https://doi.org/10.5281/zenodo.20532944"
+  },
+  "image": "https://radarschool.haramadhav.com/assets/from-long-waves-to-the-cavity-magnetron.png",
+  "datePublished": "2026-06-11",
+  "dateModified": "2026-06-11",
+  "keywords": "radar history, cavity magnetron, Yagi-Uda antenna, Chain Home, RADAR acronym, microwave engineering, radio detection"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Saira:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --paper:       #edf1f4;
+    --paper-soft:  #e3e9ef;
+    --panel:       #d8e0e8;
+    --line:        #ccd6df;
+    --fog:         #47596a;
+    --text:        #14222c;
+    --muted:       #7a8896;
+    --accent:      #0e7490;
+    --accent-soft: #2b6b80;
+    --ring:        rgba(20, 48, 64, 0.08);
+    --maxw:        980px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--text);
+    font-family: "Saira", system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: #0a566a; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  /* ---- hero (home) ---- */
+  .hero { position: relative; padding: 110px 0 76px; overflow: hidden; border-bottom: 1px solid var(--line); }
+  .hero .rings, .hero .crosshair, .hero .sweep {
+    position: absolute; top: 50%; left: 50%; width: 1100px; height: 1100px;
+    transform: translate(-50%, -42%); pointer-events: none;
+    -webkit-mask-image: radial-gradient(circle at center, #000 0%, transparent 64%);
+            mask-image: radial-gradient(circle at center, #000 0%, transparent 64%);
+  }
+  .hero .rings { background: repeating-radial-gradient(circle at center, transparent 0, transparent 78px, var(--ring) 79px, var(--ring) 80px); }
+  .hero .crosshair {
+    background:
+      linear-gradient(to right, transparent 49.95%, var(--ring) 50%, transparent 50.05%),
+      linear-gradient(to bottom, transparent 49.95%, var(--ring) 50%, transparent 50.05%);
+  }
+  .hero .sweep {
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, rgba(14,116,144,0.20) 0deg, rgba(14,116,144,0.05) 28deg, transparent 62deg, transparent 360deg);
+    animation: sweep 7.5s linear infinite;
+  }
+  @keyframes sweep { to { transform: translate(-50%, -42%) rotate(360deg); } }
+  .hero-inner { position: relative; z-index: 2; }
+
+  .callsign { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 26px; }
+  h1.wordmark { font-family: "Chakra Petch", sans-serif; font-weight: 700; font-size: clamp(40px, 8vw, 78px); line-height: 1.02; letter-spacing: 0.01em; margin: 0 0 22px; color: var(--text); text-transform: uppercase; }
+  h1.wordmark em { font-style: normal; color: var(--accent); }
+  .lede { font-size: clamp(18px, 2.3vw, 22px); color: var(--fog); font-weight: 400; max-width: 660px; margin: 0; }
+  .band-strip { margin-top: 40px; display: flex; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 3px; overflow: hidden; max-width: 660px; }
+  .band-strip span { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--muted); padding: 9px 14px; border-right: 1px solid var(--line); flex: 1 0 auto; text-align: center; }
+  .band-strip span:last-child { border-right: 0; }
+  .band-strip span.active { color: var(--accent); background: rgba(14,116,144,0.10); }
+
+  /* ---- sections ---- */
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  .section-label { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .section-label::before { content: ""; width: 22px; height: 1px; background: var(--accent-soft); display: inline-block; }
+  h2 { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: clamp(25px, 4vw, 35px); line-height: 1.18; letter-spacing: 0.005em; margin: 0 0 22px; color: var(--text); }
+  p.body { max-width: 680px; color: var(--text); }
+  p.body + p.body { margin-top: 18px; }
+  .approach { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .approach span { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--fog); border: 1px solid var(--line); border-radius: 3px; padding: 7px 13px; background: var(--paper-soft); }
+
+  .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+  @media (max-width: 620px) { .paths { grid-template-columns: 1fr; } }
+  .path-card { display: block; border: 1px solid var(--line); background: var(--paper-soft); border-radius: 4px; padding: 22px 24px; transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease; }
+  .path-card:hover { border-color: var(--accent); background: var(--panel); transform: translateY(-2px); }
+  .path-card .kicker { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .path-card .title { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 20px; color: var(--text); }
+  .path-card .sub { font-size: 15px; color: var(--fog); margin-top: 6px; }
+  .path-card .arrow { color: var(--accent); }
+
+  /* ---- article archive list ---- */
+  .archive { border-top: 1px solid var(--line); margin-top: 8px; }
+  .article-row { display: grid; grid-template-columns: 1fr auto; gap: 26px; align-items: baseline; padding: 24px 4px; border-bottom: 1px solid var(--line); }
+  @media (max-width: 620px) { .article-row { grid-template-columns: 1fr; gap: 10px; } }
+  .article-row .head h3 { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 21px; line-height: 1.2; margin: 0 0 6px; }
+  .article-row .head h3 a { color: var(--text); }
+  .article-row .head h3 a:hover { color: var(--accent); }
+  .article-row .head p { margin: 0; color: var(--fog); font-size: 16px; line-height: 1.5; max-width: 560px; }
+  .article-row .links { display: flex; gap: 14px; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: 0.04em; white-space: nowrap; }
+  .article-row .links a { border-bottom: 1px solid rgba(14,116,144,0.3); padding-bottom: 1px; }
+
+  .cite-box { border: 1px solid var(--line); border-left: 3px solid var(--accent); background: var(--paper-soft); border-radius: 4px; padding: 22px 26px; color: var(--fog); font-size: 16px; margin-top: 6px; }
+  .cite-box .tag { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-soft); display: block; margin-bottom: 10px; }
+  .cite-box img { margin-top: 12px; }
+
+  /* ---- article page ---- */
+  .topbar { border-bottom: 1px solid var(--line); }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 22px; padding-bottom: 22px; }
+  .topbar a.brand { font-family: "Chakra Petch", sans-serif; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text); font-size: 17px; }
+  .topbar a.brand:hover { color: var(--accent); }
+  .topbar .nav { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .article { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+  .article-head { padding: 60px 0 6px; }
+  .article-head .kicker { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 16px; }
+  .article-head h1 { font-family: "Chakra Petch", sans-serif; font-weight: 700; font-size: clamp(30px, 5.4vw, 46px); line-height: 1.1; letter-spacing: 0.005em; margin: 0; color: var(--text); }
+  .cover { width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--line); margin: 30px 0 0; display: block; }
+
+  .article-content { font-size: 18.5px; line-height: 1.78; color: var(--text); padding: 30px 0 10px; }
+  .article-content > *:first-child { margin-top: 0; }
+  .article-content p { margin: 0 0 1.15em; }
+  .article-content h2 { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 26px; line-height: 1.2; margin: 1.8em 0 0.5em; color: var(--text); }
+  .article-content h3 { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 21px; margin: 1.5em 0 0.4em; color: var(--text); }
+  .article-content a { color: var(--accent); border-bottom: 1px solid rgba(14,116,144,0.3); }
+  .article-content blockquote { border-left: 3px solid var(--accent); margin: 1.5em 0; padding: 4px 0 4px 22px; color: var(--fog); font-size: 1.04em; }
+  .article-content blockquote p { margin: 0.3em 0; }
+  .article-content blockquote strong { color: var(--text); }
+  .article-content ul, .article-content ol { padding-left: 1.4em; margin: 0 0 1.15em; }
+  .article-content li { margin-bottom: 0.45em; }
+  .article-content code { font-family: "IBM Plex Mono", monospace; background: var(--paper-soft); padding: 1px 6px; border-radius: 3px; font-size: 0.88em; }
+  .article-content pre { background: var(--paper-soft); border: 1px solid var(--line); border-radius: 5px; padding: 16px; overflow: auto; }
+  .article-content pre code { background: none; padding: 0; }
+  .article-content img { max-width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--line); }
+
+  .article-foot { border-top: 1px solid var(--line); margin-top: 34px; padding: 26px 0 70px; font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: 0.03em; display: flex; gap: 20px; flex-wrap: wrap; }
+
+  /* ---- footer ---- */
+  footer { padding: 50px 0 80px; }
+  .foot-grid { display: flex; flex-wrap: wrap; gap: 30px 50px; align-items: baseline; }
+  .foot-grid .col .lbl { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .foot-grid .col a, .foot-grid .col span { font-size: 16px; }
+  .colophon { margin-top: 40px; font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--muted); letter-spacing: 0.03em; }
+
+  @media (prefers-reduced-motion: reduce) { .hero .sweep { animation: none; opacity: 0.5; } }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <a class="brand" href="/">Radar School</a>
+      <a class="nav" href="/#archive">All articles</a>
+    </div>
+  </div>
+
+  <article class="article">
+    <div class="article-head">
+      <div class="kicker">Radar School</div>
+      <h1>From Long Waves to the Cavity Magnetron</h1>
+<img class="cover" src="/assets/from-long-waves-to-the-cavity-magnetron.png" alt="From Long Waves to the Cavity Magnetron" />    </div>
+
+    <div class="article-content">
+      <h1>From Long Waves to the Cavity Magnetron</h1>
+<p><em>Part 2 of the series </em><em>The Sciences Behind Radar</em><em>. Part 1 covered the physics radar grew out of. This part is about the moment the pieces became a working instrument. Part 3 turns to the signal processing and the applications.</em></p>
+<hr />
+<h2>Why It Happened When It Happened</h2>
+<p>A reflection from a metal hull had been patented in 1904 and then ignored for 30 years, which tells you that the physics was never the bottleneck. The bottleneck was that no one with money and urgency had yet decided that detecting a distant object through darkness and weather was worth the cost of building the means to do it. The 1930s supplied both, because the decade was sliding toward a war that everyone could feel coming, and a bomber that could cross a border faster than an observer could telephone a warning made the old methods of air defense useless. Several nations arrived at the same realization at almost the same time and pursued it in deep secrecy, so that Britain, Germany, the United States, the Soviet Union, and Japan were each developing radio detection while believing, often correctly, that the others were doing the same. </p>
+<blockquote>
+<p>The instrument was built not out of curiosity but out of necessity, and necessity with a national treasury behind it moves fast.</p>
+</blockquote>
+<p>The technique that the moment needed had, as so often, been worked out earlier for a different purpose. In the middle 1920s Edward Appleton and Miles Barnett established the existence of a reflecting layer high in the atmosphere by varying a transmitter&rsquo;s frequency and watching the interference between the wave that traveled along the ground and the wave that returned from the sky. Almost at the same time Gregory Breit and Merle Tuve in the United States attacked the same question with a cleaner method, sending short pulses upward and timing the delay of the echo. That pulse and echo technique, devised to measure the height of the ionosphere, is the direct ancestor of <strong>pulsed radar</strong>, and the lineage is not a metaphor. A radar engineer timing a transmitted pulse against its return is doing exactly what Breit and Tuve did, with a horizontal geometry and a metal target in place of an ionized layer. <strong><em>Atmospheric physicists built the method, and a decade later a continent under threat picked it up and pointed it at the sky for a very different reason.</em></strong></p>
+<hr />
+<h2>The British System and the Network Behind It</h2>
+<p>The British effort is the one most often recounted, and for good reason, because Robert Watson-Watt and Arnold Wilkins moved with unusual speed from a memorandum to a deployed system. The Daventry demonstration of February 1935, in which a passing bomber perturbed the signal from a shortwave broadcast station and registered on a receiver, was less a discovery than a confirmation that the physics scaled to the task. What followed was the Chain Home network, a line of tall transmitting and receiving towers along the British coast that fed plotted tracks into a centralized reporting system. The towers worked at long wavelengths and would look crude beside a modern array, yet the real sophistication lived in the handling of information, in the binding of the sensor to a command structure that could act on what it learned. The genuinely novel part was the filter room, the human network that turned a clutter of returns into a coherent air picture fast enough to scramble fighters, and that organizational achievement is a lesson the field keeps relearning, that <strong><em>a radar is only ever as good as the decision system it feeds.</em></strong></p>
+<hr />
+<h2>The Antenna That Japan Did Not Use</h2>
+<p>It is worth naming where the antennas came from, because the story sits right at the center of how knowledge and credit move across borders. The directional antenna that wartime airborne radar relied upon was invented in Japan in 1926 by Shintaro Uda, with a supporting role from his senior colleague Hidetsugu Yagi, at Tohoku Imperial University, and it became known in the English speaking world as the Yagi antenna after Yagi described it in an English language paper in 1928. The Allies adopted it widely. Japan, hampered by rivalry between its army and navy, largely set its own invention aside, and the well documented irony is that Japanese officers first grasped its importance only after the fall of Singapore in 1942, when they recovered the notebook of a captured British radar operator that referred to a Yagi array, and the interrogators did not at first recognize that Yagi was a Japanese name. A country had handed the world one of the key pieces of radar hardware and then declined to use it, while its adversaries built it into their aircraft, which is about as clear a picture as one could want of how <strong><em>an invention belongs less to the place that conceives it than to the system that chooses to fund it and field it.</em></strong></p>
+<hr />
+<h2>The Device That Changed the Scale</h2>
+<p>What every early system lacked was frequency. Long wavelengths demand enormous antennas to form narrow beams, and a narrow beam is what you need to locate a target precisely and to fit a radar onto an aircraft or a ship rather than onto a hillside. The conventional vacuum tubes of the day failed at microwave frequencies because the transit time of the electrons across the tube became comparable to the period of the oscillation they were meant to sustain. The breakthrough came in February 1940 at the University of Birmingham, where John Randall and Harry Boot built the resonant <strong><em>cavity magnetron.</em></strong> Their idea was to stop trying to make the electrons keep pace with the field and instead to let a magnetic field bend the electron stream into a rotating cloud that swept past a ring of resonant cavities machined into a copper block, pumping energy into those cavities the way a breath across the neck of a bottle excites its tone. The result was kilowatts of microwave power from a device small enough to mount in an aircraft, which pushed radar from wavelengths measured in meters down to wavelengths measured in centimeters. A narrow beam suddenly fit on a small antenna, and airborne and shipborne sets became practical.</p>
+<p>The magnetron is also where the story turns openly to alliance and manufacturing. Britain in 1940 had the device but not the industrial capacity to exploit it while fighting for survival, so the Tizard mission carried the magnetron and a trove of other secrets across the Atlantic and traded the most valuable technical secret of the war for American manufacturing power. Out of that exchange grew the Radiation Laboratory at the Massachusetts Institute of Technology, an extraordinary concentration of physicists who in the space of 5 years did not merely build radars but codified the discipline, publishing afterward the <strong><em>28 volume Radiation Laboratory Series</em></strong> that remains a foundation of the field. The work was paid for by a government that had decided the instrument was worth almost any price, and the people who passed through those rooms went on to seed postwar physics and electronics across a generation. The pattern from the first part returns here in a harder form. Electricity grew up in the nineteenth century because a steady source, a waiting mathematics, and a hungry economy arrived together. Radar matured in the 1940s because a working device, a body of existing technique, and a wartime budget arrived together. </p>
+<blockquote>
+<p>Science needs funding, and in this case the funding came from a coming war.</p>
+</blockquote>
+<hr />
+<h2>The Economy That Paid For It</h2>
+<p><strong><em>It is comfortable to tell this as a story of clever physicists and to leave the money in the background, but the money is part of the story.</em></strong></p>
+<p>The laboratories that built radar sat on top of an industrial base that decades of electrical commerce had created, the research arms of firms like General Electric and Bell Telephone in the United States and Telefunken in Germany, where vacuum tube engineering and precise manufacturing had been refined for the telephone and the radio over many years. The British scientific establishment of the period was funded, in part, by the revenues of a global empire, which is a plain fact about where the money came from rather than a verdict on it. An honest account of who paid for radar has to include the engineers, the machinists, and the administrators who kept those economies running, since none of the famous breakthroughs happen without the steady budgets and the unglamorous people behind them. </p>
+<blockquote>
+<p>A field that prides itself on tracing every signal back to its source can afford to trace its own funding back to its source with the same care.</p>
+</blockquote>
+<hr />
+<h2>The Name and the Secrecy Inside It</h2>
+<p>A technology developed in secret by rival powers tends to collect cover names before it gets an honest one, and radar is a clean example. The British called it <strong><em>RDF</em></strong>, which read to any outsider as radio direction finding, an ordinary and unthreatening capability, and the choice was deliberate, because the truly sensitive fact was not that the system could find a bearing but that it could measure range, and the cover name was built to hide exactly the capability that mattered. The Germans called their equipment <strong><em>Funkmessgerat</em></strong>, a radio measuring device, equally bland by design. The word we now use was coined by the United States Navy in 1940, attributed in the Navy&rsquo;s own history to two officers, E. F. Furth and S. P. Tucker, as an acronym for <strong><em>radio detection and ranging</em></strong>, and the Chief of Naval Operations directed its use as an unclassified term for the secret project in November of that year. The British did not adopt the word radar until 1943. The acronym happens to be a palindrome, reading the same in both directions, a small accident that helped it slide into ordinary language until the capital letters fell away and radar became a common noun.</p>
+<p>I dwell on the name because it does something the cover names did not. RDF described a deliberately misleading slice of what the system did. Funkmessgerat described the act of measuring without saying what was measured. Radio detection and ranging, by contrast, names the physical operation, the detection of an object and the determination of its range by radio. </p>
+<blockquote>
+<p>A name built on the principle outlives the secrecy and the politics around its birth, because the principle does not change even as every implementation around it changes completely. </p>
+</blockquote>
+<p>That distinction, between names that describe what a thing fundamentally does and names that describe a passing circumstance, is one I want to pick up directly in the third part, where it bears on how we name our instruments today. For now it is enough to notice that the name radar survived because it told the truth about the physics, and the cover names did not survive because they were built to conceal it.</p>
+<hr />
+<h2>References</h2>
+<ol>
+<li>Appleton, E. V., and Barnett, M. A. F. (1925). Local Reflection of Wireless Waves from the Upper Atmosphere. <em>Nature</em>.</li>
+<li>Breit, G., and Tuve, M. A. (1926). A Test of the Existence of the Conducting Layer. <em>Physical Review</em>.</li>
+<li>Watson-Watt, R. A. (1935). The Detection and Location of Aircraft by Radio Methods (memorandum to the Air Ministry).</li>
+<li>Yagi, H. (1928). Beam Transmission of Ultra Short Waves. <em>Proceedings of the Institute of Radio Engineers</em>, 16(6), 715 to 740.</li>
+<li>Sato, G. (1991). A Secret Story About the Yagi Antenna. <em>IEEE Antennas and Propagation Magazine</em>, 33(3), 7 to 18.</li>
+<li>Randall, J. T., and Boot, H. A. H. (1946). The Cavity Magnetron. <em>Journal of the Institution of Electrical Engineers</em>. Work performed in 1940.</li>
+<li>Ridenour, L. N. (Ed.). (1947). <em>Radar System Engineering</em>. MIT Radiation Laboratory Series, Volume 1. McGraw-Hill.</li>
+<li>Howeth, L. S. (1963). <em>History of Communications-Electronics in the United States Navy</em>. United States Government Printing Office.</li>
+<li>Buderi, R. (1996). <em>The Invention That Changed the World</em>. Simon and Schuster.</li>
+</ol>
+<hr />
+<p>Title image - Part 2 of the series The Sciences Behind Radar. Background - Nadir sounding antenna array pattern from my NASA P-3 deployment, with a fragment of the monostatic RCS derivation for a dielectric object.</p>
+<p>#Radar #RadarSchool #TheSciencesBehindRadar #HistoryOfScience #EngineeringHistory #Magnetron #Microwaves #DefenceTechnology #ChainHome #Waves #Money #Funding</p>
+    </div>
+
+    <div class="article-foot">
+<a href="https://www.linkedin.com/pulse/from-long-waves-cavity-magnetron-radar-cbxlc/" target="_blank" rel="noopener">Originally on LinkedIn &rarr;</a>      <a href="/#archive">Back to all articles</a>
+      <a href="https://doi.org/10.5281/zenodo.20532944">Series DOI</a>
+    </div>
+  </article>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="col"><div class="lbl">Author</div><span>Hara Madhav Talasila</span></div>
+      <div class="col"><div class="lbl">Home</div><a href="https://haramadhav.com" target="_blank" rel="noopener">haramadhav.com</a></div>
+      <div class="col"><div class="lbl">Source</div><a href="https://github.com/radarschool" target="_blank" rel="noopener">github.com/radarschool</a></div>
+      <div class="col"><div class="lbl">LinkedIn</div><a href="https://www.linkedin.com/in/haramadhav/" target="_blank" rel="noopener">in/haramadhav</a></div>
+      <div class="col"><div class="lbl">ORCID</div><a href="https://orcid.org/0000-0002-6209-3121" target="_blank" rel="noopener">0000-0002-6209-3121</a></div>
+    </div>
+    <div class="colophon">Radar School &middot; radarschool.haramadhav.com &middot; theory, examples, applications, code, and hardware.</div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>From Matched Filters to Weather Satellites · Radar School</title>
+<meta name="description" content="How radar matured by drawing on probability, communications, optics, and materials science, why a name built on a principle outlasts a name built on a design choice, and how the field returned its advances to aviation, weather, astronomy, and Earth observation." />
+<link rel="canonical" href="https://radarschool.haramadhav.com/articles/from-matched-filters-to-weather-satellites/" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta name="theme-color" content="#0e7490" />
+
+<meta name="author" content="Hara Madhav Talasila" />
+<meta property="og:title" content="From Matched Filters to Weather Satellites" />
+<meta property="og:description" content="How radar matured by drawing on probability, communications, optics, and materials science, why a name built on a principle outlasts a name built on a design choice, and how the field returned its advances to aviation, weather, astronomy, and Earth observation." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://radarschool.haramadhav.com/articles/from-matched-filters-to-weather-satellites/" />
+<meta property="og:site_name" content="Radar School" />
+<meta property="og:image" content="https://radarschool.haramadhav.com/assets/from-matched-filters-to-weather-satellites.png" /><meta name="twitter:card" content="summary_large_image" />
+
+<meta name="citation_title" content="From Matched Filters to Weather Satellites" />
+<meta name="citation_author" content="Hara Madhav Talasila" />
+<meta name="citation_publication_date" content="2026/06/12" /><meta name="citation_technical_report_institution" content="Radar School" />
+<meta name="citation_publisher" content="Radar School" />
+<meta name="citation_abstract_html_url" content="https://radarschool.haramadhav.com/articles/from-matched-filters-to-weather-satellites/" />
+<meta name="citation_keywords" content="synthetic aperture radar; matched filter; signal processing; software defined radio; weather radar; radio astronomy; remote sensing" /><meta name="citation_language" content="en" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "From Matched Filters to Weather Satellites",
+  "description": "How radar matured by drawing on probability, communications, optics, and materials science, why a name built on a principle outlasts a name built on a design choice, and how the field returned its advances to aviation, weather, astronomy, and Earth observation.",
+  "url": "https://radarschool.haramadhav.com/articles/from-matched-filters-to-weather-satellites/",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://radarschool.haramadhav.com/articles/from-matched-filters-to-weather-satellites/"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Hara Madhav Talasila",
+    "url": "https://orcid.org/0000-0002-6209-3121"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Radar School",
+    "url": "https://radarschool.haramadhav.com"
+  },
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "Radar School",
+    "url": "https://radarschool.haramadhav.com",
+    "identifier": "https://doi.org/10.5281/zenodo.20532944"
+  },
+  "image": "https://radarschool.haramadhav.com/assets/from-matched-filters-to-weather-satellites.png",
+  "datePublished": "2026-06-12",
+  "dateModified": "2026-06-12",
+  "keywords": "synthetic aperture radar, matched filter, signal processing, software defined radio, weather radar, radio astronomy, remote sensing"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Saira:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --paper:       #edf1f4;
+    --paper-soft:  #e3e9ef;
+    --panel:       #d8e0e8;
+    --line:        #ccd6df;
+    --fog:         #47596a;
+    --text:        #14222c;
+    --muted:       #7a8896;
+    --accent:      #0e7490;
+    --accent-soft: #2b6b80;
+    --ring:        rgba(20, 48, 64, 0.08);
+    --maxw:        980px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--text);
+    font-family: "Saira", system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: #0a566a; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  /* ---- hero (home) ---- */
+  .hero { position: relative; padding: 110px 0 76px; overflow: hidden; border-bottom: 1px solid var(--line); }
+  .hero .rings, .hero .crosshair, .hero .sweep {
+    position: absolute; top: 50%; left: 50%; width: 1100px; height: 1100px;
+    transform: translate(-50%, -42%); pointer-events: none;
+    -webkit-mask-image: radial-gradient(circle at center, #000 0%, transparent 64%);
+            mask-image: radial-gradient(circle at center, #000 0%, transparent 64%);
+  }
+  .hero .rings { background: repeating-radial-gradient(circle at center, transparent 0, transparent 78px, var(--ring) 79px, var(--ring) 80px); }
+  .hero .crosshair {
+    background:
+      linear-gradient(to right, transparent 49.95%, var(--ring) 50%, transparent 50.05%),
+      linear-gradient(to bottom, transparent 49.95%, var(--ring) 50%, transparent 50.05%);
+  }
+  .hero .sweep {
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, rgba(14,116,144,0.20) 0deg, rgba(14,116,144,0.05) 28deg, transparent 62deg, transparent 360deg);
+    animation: sweep 7.5s linear infinite;
+  }
+  @keyframes sweep { to { transform: translate(-50%, -42%) rotate(360deg); } }
+  .hero-inner { position: relative; z-index: 2; }
+
+  .callsign { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 26px; }
+  h1.wordmark { font-family: "Chakra Petch", sans-serif; font-weight: 700; font-size: clamp(40px, 8vw, 78px); line-height: 1.02; letter-spacing: 0.01em; margin: 0 0 22px; color: var(--text); text-transform: uppercase; }
+  h1.wordmark em { font-style: normal; color: var(--accent); }
+  .lede { font-size: clamp(18px, 2.3vw, 22px); color: var(--fog); font-weight: 400; max-width: 660px; margin: 0; }
+  .band-strip { margin-top: 40px; display: flex; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 3px; overflow: hidden; max-width: 660px; }
+  .band-strip span { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--muted); padding: 9px 14px; border-right: 1px solid var(--line); flex: 1 0 auto; text-align: center; }
+  .band-strip span:last-child { border-right: 0; }
+  .band-strip span.active { color: var(--accent); background: rgba(14,116,144,0.10); }
+
+  /* ---- sections ---- */
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  .section-label { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .section-label::before { content: ""; width: 22px; height: 1px; background: var(--accent-soft); display: inline-block; }
+  h2 { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: clamp(25px, 4vw, 35px); line-height: 1.18; letter-spacing: 0.005em; margin: 0 0 22px; color: var(--text); }
+  p.body { max-width: 680px; color: var(--text); }
+  p.body + p.body { margin-top: 18px; }
+  .approach { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .approach span { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--fog); border: 1px solid var(--line); border-radius: 3px; padding: 7px 13px; background: var(--paper-soft); }
+
+  .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+  @media (max-width: 620px) { .paths { grid-template-columns: 1fr; } }
+  .path-card { display: block; border: 1px solid var(--line); background: var(--paper-soft); border-radius: 4px; padding: 22px 24px; transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease; }
+  .path-card:hover { border-color: var(--accent); background: var(--panel); transform: translateY(-2px); }
+  .path-card .kicker { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .path-card .title { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 20px; color: var(--text); }
+  .path-card .sub { font-size: 15px; color: var(--fog); margin-top: 6px; }
+  .path-card .arrow { color: var(--accent); }
+
+  /* ---- article archive list ---- */
+  .archive { border-top: 1px solid var(--line); margin-top: 8px; }
+  .article-row { display: grid; grid-template-columns: 1fr auto; gap: 26px; align-items: baseline; padding: 24px 4px; border-bottom: 1px solid var(--line); }
+  @media (max-width: 620px) { .article-row { grid-template-columns: 1fr; gap: 10px; } }
+  .article-row .head h3 { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 21px; line-height: 1.2; margin: 0 0 6px; }
+  .article-row .head h3 a { color: var(--text); }
+  .article-row .head h3 a:hover { color: var(--accent); }
+  .article-row .head p { margin: 0; color: var(--fog); font-size: 16px; line-height: 1.5; max-width: 560px; }
+  .article-row .links { display: flex; gap: 14px; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: 0.04em; white-space: nowrap; }
+  .article-row .links a { border-bottom: 1px solid rgba(14,116,144,0.3); padding-bottom: 1px; }
+
+  .cite-box { border: 1px solid var(--line); border-left: 3px solid var(--accent); background: var(--paper-soft); border-radius: 4px; padding: 22px 26px; color: var(--fog); font-size: 16px; margin-top: 6px; }
+  .cite-box .tag { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-soft); display: block; margin-bottom: 10px; }
+  .cite-box img { margin-top: 12px; }
+
+  /* ---- article page ---- */
+  .topbar { border-bottom: 1px solid var(--line); }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 22px; padding-bottom: 22px; }
+  .topbar a.brand { font-family: "Chakra Petch", sans-serif; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text); font-size: 17px; }
+  .topbar a.brand:hover { color: var(--accent); }
+  .topbar .nav { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .article { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+  .article-head { padding: 60px 0 6px; }
+  .article-head .kicker { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 16px; }
+  .article-head h1 { font-family: "Chakra Petch", sans-serif; font-weight: 700; font-size: clamp(30px, 5.4vw, 46px); line-height: 1.1; letter-spacing: 0.005em; margin: 0; color: var(--text); }
+  .cover { width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--line); margin: 30px 0 0; display: block; }
+
+  .article-content { font-size: 18.5px; line-height: 1.78; color: var(--text); padding: 30px 0 10px; }
+  .article-content > *:first-child { margin-top: 0; }
+  .article-content p { margin: 0 0 1.15em; }
+  .article-content h2 { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 26px; line-height: 1.2; margin: 1.8em 0 0.5em; color: var(--text); }
+  .article-content h3 { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 21px; margin: 1.5em 0 0.4em; color: var(--text); }
+  .article-content a { color: var(--accent); border-bottom: 1px solid rgba(14,116,144,0.3); }
+  .article-content blockquote { border-left: 3px solid var(--accent); margin: 1.5em 0; padding: 4px 0 4px 22px; color: var(--fog); font-size: 1.04em; }
+  .article-content blockquote p { margin: 0.3em 0; }
+  .article-content blockquote strong { color: var(--text); }
+  .article-content ul, .article-content ol { padding-left: 1.4em; margin: 0 0 1.15em; }
+  .article-content li { margin-bottom: 0.45em; }
+  .article-content code { font-family: "IBM Plex Mono", monospace; background: var(--paper-soft); padding: 1px 6px; border-radius: 3px; font-size: 0.88em; }
+  .article-content pre { background: var(--paper-soft); border: 1px solid var(--line); border-radius: 5px; padding: 16px; overflow: auto; }
+  .article-content pre code { background: none; padding: 0; }
+  .article-content img { max-width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--line); }
+
+  .article-foot { border-top: 1px solid var(--line); margin-top: 34px; padding: 26px 0 70px; font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: 0.03em; display: flex; gap: 20px; flex-wrap: wrap; }
+
+  /* ---- footer ---- */
+  footer { padding: 50px 0 80px; }
+  .foot-grid { display: flex; flex-wrap: wrap; gap: 30px 50px; align-items: baseline; }
+  .foot-grid .col .lbl { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .foot-grid .col a, .foot-grid .col span { font-size: 16px; }
+  .colophon { margin-top: 40px; font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--muted); letter-spacing: 0.03em; }
+
+  @media (prefers-reduced-motion: reduce) { .hero .sweep { animation: none; opacity: 0.5; } }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <a class="brand" href="/">Radar School</a>
+      <a class="nav" href="/#archive">All articles</a>
+    </div>
+  </div>
+
+  <article class="article">
+    <div class="article-head">
+      <div class="kicker">Radar School</div>
+      <h1>From Matched Filters to Weather Satellites</h1>
+<img class="cover" src="/assets/from-matched-filters-to-weather-satellites.png" alt="From Matched Filters to Weather Satellites" />    </div>
+
+    <div class="article-content">
+      <h1>From Matched Filters to Weather Satellites</h1>
+<p><em>Part 3 of the series </em><em>The Sciences Behind Radar</em><em>. Part 1 was the physics, part 2 was the wartime engineering, and this part is the mathematics that matured the field, the question of how we name our instruments, and what radar handed back to the world.</em></p>
+<hr />
+<h2>The Mathematics It Built On</h2>
+<blockquote>
+<p>A radar receiver listens to a faint echo buried in noise, and the question of <strong><em>how to pull a known signal out of noise is not really an engineering question, it is a question of mathematics and statistics.</em></strong> The field that answered it first was communications. </p>
+</blockquote>
+<p>The most consequential single result was the <strong>matched filter</strong>, derived by Dwight North at RCA in 1943, who showed that for a known pulse in white noise the optimal linear filter has an impulse response that is the time reversed copy of the expected signal, and that this filter maximizes the ratio of peak signal to noise at the moment of decision. Every correlation receiver and every pulse compressor since is an instance of his result. The statisticians followed close behind, with Jess Marcum computing detection statistics for a steady target in the late 1940s and Peter Swerling extending the analysis to targets that fluctuate from pulse to pulse, so that the modern practice of specifying a system by its probability of detection at a given false alarm rate is a dialect of mathematical statistics these workers translated for the field. Norbert Wiener gave the framework for optimal filtering of random processes, Claude Shannon founded information theory in 1948, and Philip Woodward carried Shannon&rsquo;s perspective directly into radar in 1953 with the ambiguity function, a single object that describes how well a waveform can resolve a target in range and in velocity at the same time.</p>
+<p>The international character of the older mathematics carries straight through into the digital era, which is worth saying plainly. The transform at the center of everything came from Joseph <strong><em>Fourier</em></strong> in France early in the nineteenth century, and the fast algorithm that finally made it cheap, published by Cooley and Tukey in 1965, turned out to be a rediscovery and generalization of a method Gauss had used in Germany around 1805. The <strong><em>sampling</em></strong> theorem that lets a radar turn a continuous echo into numbers without losing information was stated independently in several countries, by Nyquist and Shannon in the United States, by Kotelnikov in the Soviet Union, and by Whittaker in Britain. The link between a signal&rsquo;s autocorrelation and its power spectrum, which underlies how a radar reasons about clutter and noise, carries the names of both Wiener in the United States and Khinchin in the Soviet Union. Digital radar rests on foundations every bit <strong><em>as international as</em></strong> the trigonometry from part 1.</p>
+<p>The same habit of drawing on neighboring fields produced <strong><em>pulse compression</em></strong>, which lets a radar transmit a long chirped pulse for its energy and then collapse it into a sharp spike for its resolution, with the full theory set down by Klauder and colleagues at Bell Laboratories in 1960. The early compression filters were built as surface acoustic wave devices, which means radar reached into the physics of sound in solids to solve a problem that began in the physics of radio. The most striking example was <strong><em>synthetic aperture radar</em></strong>, credited to Carl Wiley in 1951, where the radar builds a large effective antenna out of motion and time rather than out of metal. Because no digital computer of the 1950s could focus that data, the workers at the University of Michigan recorded the returns on film and focused them with lenses and coherent light, processing radar with optics, and in doing so Emmett Leith and Juris Upatnieks advanced holography in turn, so that for once the influence ran in both directions at once. </p>
+<blockquote>
+<p>When computing finally caught up, it was the <strong><em>fast Fourier transform</em></strong> that opened the door, moving the whole chain of radar processing into software. </p>
+</blockquote>
+<p>The hardware underneath was rebuilt from the atom up as well, from the vacuum tubes that carried the first decades to the gallium arsenide and then gallium nitride devices that let a modern radar spread its transmitter across thousands of small solid state modules, which is a direct result of work in materials science and semiconductor physics.</p>
+<hr />
+<h2>Why the Name Matters</h2>
+<p>I promised in the second part to come back to the question of names, and the place to start is with the word radar itself, which names a principle. </p>
+<blockquote>
+<p>Radio detection and ranging describes what the instrument fundamentally does, and the description stays true no matter how completely the implementation changes. </p>
+</blockquote>
+<p>The same holds for the other durable names in the family, <strong><em>sonar</em></strong> for sound, <strong><em>lidar</em></strong> for light, <strong><em>sodar</em></strong> for sound again in the lower atmosphere. Each names the physical operation, the wave and the act, and because the operation does not change, the name does not age. You can replace every vacuum tube with a transistor, move every analog filter into software, and swap a rotating dish for an electronically steered array, and the word radar still tells the truth about what the machine is for.</p>
+<p>Set that against a name like software defined radio, which has spread through industry over the past quarter century and which I think is a weak name for an honest reason. It describes an implementation choice rather than a principle. Calling a radio software defined meant something in a narrow window when most radios were not, when the novelty was that the waveform and the filtering and the demodulation lived in reconfigurable code rather than in fixed hardware. That window has closed. <strong><em>Nearly every radio and very nearly every radar built today is software defined in any sense that matters, the reconfigurable hardware is now the default rather than the exception, and so the label has quietly stopped distinguishing anything from anything else.</em></strong> A name that once marked a real boundary now covers the whole territory, which is to say it marks nothing. That is what happens to names drawn from a passing circumstance of engineering rather than from the physics. They are useful for exactly as long as the circumstance is unusual, and then they fade into redundancy while still being spoken out of habit. The deeper point is not a complaint about one term. It is that a name derived from a principle marks a real and lasting boundary, because the principle it names does not move, while a name derived from this year&rsquo;s design practice marks a line that next year will erase. </p>
+<p>The trigonometry from the first part carried a Sanskrit word about the half chord of an arc all the way into Latin through a chain of translators, and it survived because it pointed at a real geometric thing. Names that point at real things travel well. Names that point at the current way of building something do not.</p>
+<blockquote>
+<p>A field that respects its own theory should be careful about which kind it adopts for the instruments it expects to outlast a generation of hardware.</p>
+</blockquote>
+<hr />
+<h2>What Radar Gave Back</h2>
+<p>A series that opened by tracing everything radar drew on would be lopsided if it did not close with what radar returned, because <strong><em>the field has fed its advances back into many others, often the very ones it once drew from.</em></strong> Start with the air over our heads. The civil aviation system that moves millions of people every day rests entirely on radar, on the primary and secondary surveillance that lets controllers hold aircraft apart in cloud and at night, and the ordinary <strong><em>safety of modern flight</em></strong> is, in a real sense, a gift from the wartime laboratories to everyone who has ever boarded a plane without thinking about how the sky is kept orderly. <strong><em>Weather</em></strong> is the second one. Doppler weather radar and the networks built around it turned the forecasting of severe storms from guesswork into measurement, and the warning that now precedes a tornado or a hurricane landfall, measured in tens of minutes rather than seconds, is paid for in lives the instrument quietly saves.</p>
+<p>Then there is the reach into space, which closes a circle the first part opened. Bose had speculated in 1897 that the sun might emit radiation at the wavelengths he was studying, and after the war it was radar engineers, trained to build sensitive microwave receivers, who founded <strong><em>radio astronomy</em></strong> and turned their instruments upward, with the discovery of pulsars and the mapping of the radio sky following directly from skills the war had taught them. Spaceborne synthetic aperture radar now images the Earth through its clouds and across its night side, planetary radar mapped the surface of Venus through a permanent overcast that no camera could pierce, and <strong><em>radar altimetry</em></strong> measures the rise of the sea to the centimeter. The magnetron that made microwave radar possible also wandered, almost by accident, into the kitchen, after a Raytheon engineer noticed a heated effect near a running set, and the <strong><em>microwave oven</em></strong> now sits in tens of millions of homes.</p>
+<p>I will end on the corner of this that is my own, because it makes the two way traffic concrete. <strong><em>That is Radio-Echo Sounding (RES).</em></strong> The radars that sound the polar ice sheets from aircraft, reading the layers of accumulated snow and the bed far beneath the ice, and letting us measure how the great reservoirs of frozen water are changing, are built from every contribution this series has described, the trigonometry and the series expansions, the field theory and the millimeter wave hardware, the matched filter and the pulse compression and the synthetic aperture and the digital processing. They gather all of it and turn it back toward one of the most consequential measurements of our time, the state of the ice in a warming world. That is the shape of the whole story in a single instrument. </p>
+<blockquote>
+<p><strong>Radar drew on the best of every science it could reach, across centuries and continents</strong>, and it has spent the decades since feeding its own advances back into navigation, weather, astronomy, and the study of the planet itself. </p>
+<p>Radar is less a single invention than a place where many sciences meet, and the meeting still runs in both directions.</p>
+</blockquote>
+<hr />
+<h2>References</h2>
+<ol>
+<li>North, D. O. (1943). An Analysis of the Factors which Determine Signal/Noise Discrimination in Pulsed-Carrier Systems. RCA Technical Report PTR-6C. Reprinted in <em>Proceedings of the IEEE</em>, 1963.</li>
+<li>Shannon, C. E. (1948). A Mathematical Theory of Communication. <em>Bell System Technical Journal</em>.</li>
+<li>Kotelnikov, V. A. (1933). On the Carrying Capacity of the Ether and Wire in Telecommunications. <em>Proceedings of the First All-Union Conference on Communications, Moscow</em>.</li>
+<li>Wiener, N. (1949). <em>Extrapolation, Interpolation, and Smoothing of Stationary Time Series</em>. MIT Press and Wiley.</li>
+<li>Woodward, P. M. (1953). <em>Probability and Information Theory, with Applications to Radar</em>. Pergamon Press.</li>
+<li>Marcum, J. I. (1960). A Statistical Theory of Target Detection by Pulsed Radar. <em>IRE Transactions on Information Theory</em>.</li>
+<li>Swerling, P. (1960). Probability of Detection for Fluctuating Targets. <em>IRE Transactions on Information Theory</em>.</li>
+<li>Klauder, J. R., Price, A. C., Darlington, S., and Albersheim, W. J. (1960). The Theory and Design of Chirp Radars. <em>Bell System Technical Journal</em>.</li>
+<li>Cooley, J. W., and Tukey, J. W. (1965). An Algorithm for the Machine Calculation of Complex Fourier Series. <em>Mathematics of Computation</em>.</li>
+<li>Cutrona, L. J., Leith, E. N., Porcello, L. J., and Vivian, W. E. (1966). On the Application of Coherent Optical Processing Techniques to Synthetic-Aperture Radar. <em>Proceedings of the IEEE</em>.</li>
+<li>Wiley, C. A. (1985). Synthetic Aperture Radars, A Paradigm for Technology Evolution. <em>IEEE Transactions on Aerospace and Electronic Systems</em>. Concept dating to 1951.</li>
+<li>Spencer, P. L. (1950). Method of Treating Foodstuffs. United States Patent 2,495,429 (filed 1945).</li>
+<li>Skolnik, M. I. (2008). <em>Radar Handbook</em> (3rd ed.). McGraw-Hill.</li>
+</ol>
+<hr />
+<p>Title image - Part 3 of the series The Sciences Behind Radar. Background - Nadir sounding antenna array pattern from my NASA P-3 deployment, with a fragment of the monostatic RCS derivation for a dielectric object.</p>
+<p>#Radar #RadarSchool #TheSciencesBehindRadar #HistoryOfScience #EngineeringHistory #SignalProcessing #SyntheticApertureRadar #RemoteSensing #SoftwareDefinedRadio #MatchedFilter #weather #radio #astronomy</p>
+    </div>
+
+    <div class="article-foot">
+<a href="https://www.linkedin.com/pulse/from-matched-filters-weather-satellites-radar-hnnrc/" target="_blank" rel="noopener">Originally on LinkedIn &rarr;</a>      <a href="/#archive">Back to all articles</a>
+      <a href="https://doi.org/10.5281/zenodo.20532944">Series DOI</a>
+    </div>
+  </article>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="col"><div class="lbl">Author</div><span>Hara Madhav Talasila</span></div>
+      <div class="col"><div class="lbl">Home</div><a href="https://haramadhav.com" target="_blank" rel="noopener">haramadhav.com</a></div>
+      <div class="col"><div class="lbl">Source</div><a href="https://github.com/radarschool" target="_blank" rel="noopener">github.com/radarschool</a></div>
+      <div class="col"><div class="lbl">LinkedIn</div><a href="https://www.linkedin.com/in/haramadhav/" target="_blank" rel="noopener">in/haramadhav</a></div>
+      <div class="col"><div class="lbl">ORCID</div><a href="https://orcid.org/0000-0002-6209-3121" target="_blank" rel="noopener">0000-0002-6209-3121</a></div>
+    </div>
+    <div class="colophon">Radar School &middot; radarschool.haramadhav.com &middot; theory, examples, applications, code, and hardware.</div>
+  </div>
+</footer>
+</body>
+</html>
